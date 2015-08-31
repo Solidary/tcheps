@@ -1,0 +1,20 @@
+<resources>
+    <string name="app_name">Tcheps</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+
+    <string name="sign_in_activity_title">Sign In</string>
+    <string name="sign_in_forget_password">Forget your password ?</string>
+    <string name="sign_in_sign_up">Sign Up</string>
+    <string name="title_activity_sign_up">SignUpActivity</string>
+    <string name="sign_in_email_hint">Email</string>
+    <string name="sign_in_password_hint">Password</string>
+
+    <string name="sign_up_name_hint">Full Name</string>
+    <string name="sign_up_email_hint">Email</string>
+    <string name="sign_up_password_hint">Password</string>
+    <string name="sign_up_password_confirmation_hint">Confirm Password</string>
+    <string name="sign_up_birth_date_hint">Birthdate</string>
+    <string name="sign_up_gender_hint">Gender</string>
+</resources>
