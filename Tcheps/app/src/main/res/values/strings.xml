@@ -11,10 +11,34 @@
     <string name="sign_in_email_hint">Email</string>
     <string name="sign_in_password_hint">Password</string>
 
-    <string name="sign_up_name_hint">Full Name</string>
+    <string name="sign_up_activity_title">Sign Up</string>
+    <string name="sign_up_first_name_hint">First Name</string>
+    <string name="sign_up_last_name_hint">Last Name</string>
     <string name="sign_up_email_hint">Email</string>
     <string name="sign_up_password_hint">Password</string>
     <string name="sign_up_password_confirmation_hint">Confirm Password</string>
-    <string name="sign_up_birth_date_hint">Birthdate</string>
+    <string name="sign_up_birth_date_hint">Birth Date</string>
     <string name="sign_up_gender_hint">Gender</string>
+    <string name="sign_up_student_class_hint">Your class</string>
+    <string name="sign_up_student_school_hint">Name of your school</string>
+    <string name="sign_up_teacher_place_type_hint">Place where you\'re teaching</string>
+    <string-array name="sign_up_teacher_place_type_entries">
+        <item>College</item>
+        <item>University</item>
+        <item>Evening Classes</item>
+        <item>Other</item>
+    </string-array>
+    <string name="sign_up_teacher_subjects_hint">Subjects you\'re teaching</string>
+    <string-array name="sign_up_teacher_subjects_entries">
+        <item>Biology</item>
+        <item>Mathematics</item>
+        <item>Physics</item>
+        <item>Chemistry</item>
+        <item>Litterature</item>
+        <item>English</item>
+        <item>French</item>
+    </string-array>
+    <string name="appbar_scrolling_behavior">android.support.design.widget.AppBarLayout$ScrollingViewBehavior</string>
+    <string name="lorem_ipsum">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc sagittis faucibus rhoncus. Donec dignissim finibus diam nec sollicitudin. Nullam sed leo nec felis imperdiet maximus in mattis lacus. Phasellus eget quam ut metus commodo fermentum. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec condimentum ultricies risus, et ultricies leo sollicitudin sed. In hac habitasse platea dictumst. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Suspendisse in lacinia risus, sed mattis justo. Sed a quam laoreet nisl efficitur eleifend nec quis nisi.</string>
+    <string name="title_activity_problems_feed">Problems</string>
 </resources>

@@ -2,23 +2,77 @@ package com.tcheps.activities;
 
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
+import android.widget.FrameLayout;
+import android.widget.LinearLayout;
 
 import com.tcheps.activities.R;
+import com.tcheps.fragments.SignUpStudentFragment;
+import com.tcheps.fragments.SignUpTeacherFragment;
+import com.wdullaer.materialdatetimepicker.date.DatePickerDialog;
 
-public class SignUpActivity extends ActionBarActivity {
+import java.util.Calendar;
+
+import butterknife.Bind;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
+
+public class SignUpActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener {
+
+    public final static String ARG_TYPE_USER =
+            "com.tcheps.activities.SignUpActivity.arg_type_user";
+
+    @Bind(R.id.toolbar)
+    Toolbar toolbar;
+
+    @Bind(R.id.sign_up_birth_date_btn)
+    Button birthDate;
+
+    @Bind(R.id.sign_up_student_group_ll)
+    LinearLayout studentGroup;
+
+    @Bind(R.id.sign_up_teacher_group_ll)
+    LinearLayout teacherGroup;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
+        ButterKnife.bind(this);
+
+        setupToolbar();
+
+        Bundle bundle = getIntent().getExtras();
+        if (bundle.getString(ARG_TYPE_USER).equals("student")) {
+            // SignUpStudentFragment studentFragment = SignUpStudentFragment.newInstance("", "");
+
+            // teacherGroup.setVisibility(View.INVISIBLE);teacherGroup.removeAllViews();
+            teacherGroup.setVisibility(View.GONE);
+            studentGroup.setVisibility(View.VISIBLE);
+        } else if (bundle.getString(ARG_TYPE_USER).equals("teacher")) {
+            // SignUpTeacherFragment teacherFragment = SignUpTeacherFragment.newInstance("", "");
+
+            studentGroup.setVisibility(View.GONE);
+            teacherGroup.setVisibility(View.VISIBLE);
+        }
+    }
+
+    private void setupToolbar() {
+        toolbar.setTitle(getString(R.string.sign_up_activity_title));
+        setSupportActionBar(toolbar);
+
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_sign_up, menu);
+        // getMenuInflater().inflate(R.menu.menu_sign_up, menu);
         return true;
     }
 
@@ -35,5 +89,23 @@ public class SignUpActivity extends ActionBarActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @OnClick(R.id.sign_up_birth_date_btn)
+    public void onBirthDateClick() {
+        Calendar now = Calendar.getInstance();
+        DatePickerDialog dpd = DatePickerDialog.newInstance(
+                this,
+                now.get(Calendar.YEAR),
+                now.get(Calendar.MONTH),
+                now.get(Calendar.DAY_OF_MONTH)
+        );
+        dpd.show(getFragmentManager(), "Birth date");
+    }
+
+    @Override
+    public void onDateSet(DatePickerDialog datePickerDialog, int year, int monthOfYear, int dayOfMonth) {
+        String date = year + " - " + (monthOfYear + 1) + " - " + dayOfMonth;
+        birthDate.setText(date);
     }
 }
