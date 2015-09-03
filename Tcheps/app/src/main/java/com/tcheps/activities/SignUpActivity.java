@@ -1,6 +1,5 @@
 package com.tcheps.activities;
 
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -8,12 +7,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 
-import com.tcheps.activities.R;
-import com.tcheps.fragments.SignUpStudentFragment;
-import com.tcheps.fragments.SignUpTeacherFragment;
 import com.wdullaer.materialdatetimepicker.date.DatePickerDialog;
 
 import java.util.Calendar;
@@ -49,13 +44,13 @@ public class SignUpActivity extends AppCompatActivity implements DatePickerDialo
 
         Bundle bundle = getIntent().getExtras();
         if (bundle.getString(ARG_TYPE_USER).equals("student")) {
-            // SignUpStudentFragment studentFragment = SignUpStudentFragment.newInstance("", "");
+            // UserProfileFollowersFragment studentFragment = UserProfileFollowersFragment.newInstance("", "");
 
             // teacherGroup.setVisibility(View.INVISIBLE);teacherGroup.removeAllViews();
             teacherGroup.setVisibility(View.GONE);
             studentGroup.setVisibility(View.VISIBLE);
         } else if (bundle.getString(ARG_TYPE_USER).equals("teacher")) {
-            // SignUpTeacherFragment teacherFragment = SignUpTeacherFragment.newInstance("", "");
+            // UserProfilePostsFragment teacherFragment = UserProfilePostsFragment.newInstance("", "");
 
             studentGroup.setVisibility(View.GONE);
             teacherGroup.setVisibility(View.VISIBLE);

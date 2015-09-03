@@ -41,4 +41,8 @@
     <string name="appbar_scrolling_behavior">android.support.design.widget.AppBarLayout$ScrollingViewBehavior</string>
     <string name="lorem_ipsum">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc sagittis faucibus rhoncus. Donec dignissim finibus diam nec sollicitudin. Nullam sed leo nec felis imperdiet maximus in mattis lacus. Phasellus eget quam ut metus commodo fermentum. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec condimentum ultricies risus, et ultricies leo sollicitudin sed. In hac habitasse platea dictumst. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Suspendisse in lacinia risus, sed mattis justo. Sed a quam laoreet nisl efficitur eleifend nec quis nisi.</string>
     <string name="title_activity_problems_feed">Problems</string>
+    <string name="title_activity_user_profile">UserProfile</string>
+
+<!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

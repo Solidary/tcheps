@@ -1,6 +1,8 @@
 package com.tcheps.activities;
 
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -8,6 +10,7 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 
 import com.tcheps.activities.R;
 import com.tcheps.adapters.ProblemsFeedAdapter;
@@ -15,8 +18,11 @@ import com.tcheps.models.Problem;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
+import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
-public class ProblemsFeedActivity extends AppCompatActivity {
+public class ProblemsFeedActivity extends AppCompatActivity implements
+        ProblemsFeedAdapter.OnProblemsFeedClickListener {
 
     @Bind(R.id.toolbar)
     Toolbar toolbar;
@@ -42,6 +48,7 @@ public class ProblemsFeedActivity extends AppCompatActivity {
     private void setupRecyclerView() {
         rvProblemsFeed.setLayoutManager(new LinearLayoutManager(this));
         ProblemsFeedAdapter adapter = new ProblemsFeedAdapter(this, Problem.PROBLEMS);
+        adapter.setOnProblemsFeedClickListener(this);
         rvProblemsFeed.setAdapter(adapter);
     }
 
@@ -65,5 +72,20 @@ public class ProblemsFeedActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected void attachBaseContext(Context newBase) {
+        super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
+    }
+
+    @Override
+    public void onProfileClick(View view, String tag) {
+        Bundle bundle = new Bundle();
+        bundle.putString(UserProfileActivity.ARG_USER_OBJECTID, tag);
+
+        Intent profileIntent = new Intent(this, UserProfileActivity.class);
+        profileIntent.putExtras(bundle);
+        startActivity(profileIntent);
     }
 }

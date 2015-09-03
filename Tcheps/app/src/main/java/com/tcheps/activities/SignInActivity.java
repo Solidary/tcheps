@@ -45,7 +45,6 @@ public class SignInActivity extends AppCompatActivity {
 
     @OnClick({R.id.sign_in_sign_up_student_btn, R.id.sign_in_sign_up_teacher_btn})
     public void onSignUpClick(Button bv) {
-        Intent signUpIntent = new Intent(this, SignUpActivity.class);
         Bundle bundle = new Bundle();
 
         if (bv.getId() == R.id.sign_in_sign_up_student_btn) {
@@ -53,6 +52,8 @@ public class SignInActivity extends AppCompatActivity {
         } else if (bv.getId() == R.id.sign_in_sign_up_teacher_btn) {
             bundle.putString(SignUpActivity.ARG_TYPE_USER, "teacher");
         }
+
+        Intent signUpIntent = new Intent(this, SignUpActivity.class);
         signUpIntent.putExtras(bundle);
         startActivity(signUpIntent);
     }

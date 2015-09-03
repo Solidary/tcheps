@@ -78,6 +78,7 @@
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/exploded-aar/com.android.support/recyclerview-v7/21.0.3/jars" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/exploded-aar/com.android.support/support-v4/23.0.0/jars" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/exploded-aar/com.wdullaer/materialdatetimepicker/1.5.0/jars" />
+      <excludeFolder url="file://$MODULE_DIR$/build/intermediates/exploded-aar/uk.co.chrisjenx/calligraphy/2.1.0/jars" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/incremental" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/jacoco" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/javaResources" />
@@ -99,6 +100,7 @@
     <orderEntry type="library" exported="" name="materialdatetimepicker-1.5.0" level="project" />
     <orderEntry type="library" exported="" name="recyclerview-v7-21.0.3" level="project" />
     <orderEntry type="library" exported="" name="com.amulyakhare.textdrawable-1.0.1" level="project" />
+    <orderEntry type="library" exported="" name="calligraphy-2.1.0" level="project" />
     <orderEntry type="library" exported="" name="support-v4-23.0.0" level="project" />
     <orderEntry type="library" exported="" name="cardview-v7-21.0.3" level="project" />
     <orderEntry type="library" exported="" name="support-annotations-23.0.0" level="project" />

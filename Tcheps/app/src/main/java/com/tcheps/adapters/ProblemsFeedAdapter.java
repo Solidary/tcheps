@@ -1,6 +1,8 @@
 package com.tcheps.adapters;
 
 import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,6 +13,7 @@ import android.widget.TextView;
 import com.amulyakhare.textdrawable.TextDrawable;
 import com.amulyakhare.textdrawable.util.ColorGenerator;
 import com.tcheps.activities.R;
+import com.tcheps.activities.UserProfileActivity;
 import com.tcheps.models.Problem;
 import com.tcheps.utils.Utils;
 
@@ -18,14 +21,18 @@ import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 /**
  * Created by mael-fosso on 9/2/15.
  */
-public class ProblemsFeedAdapter extends RecyclerView.Adapter<ProblemsFeedAdapter.ViewHolder> {
+public class ProblemsFeedAdapter extends RecyclerView.Adapter<ProblemsFeedAdapter.ViewHolder> implements
+        View.OnClickListener {
 
     private Context mContext;
     private List<Problem> mProblems;
+
+    private OnProblemsFeedClickListener onProblemsFeedClickListener;
 
     public ProblemsFeedAdapter(Context context, List<Problem> problems) {
         mProblems = problems;
@@ -57,13 +64,34 @@ public class ProblemsFeedAdapter extends RecyclerView.Adapter<ProblemsFeedAdapte
                 rc));
         holder.authorDisplayName.setText(problem.getAuthor().getDisplayName());
         holder.authorDescription.setText(problem.getAuthor().getDescription());
-
         holder.description.setText(problem.getDescription());
+
+        holder.authorAvatar.setTag(problem.getAuthor().getObjectId());
+        holder.authorDisplayName.setTag(problem.getAuthor().getObjectId());
+
+        holder.authorAvatar.setOnClickListener(this);
+        holder.authorDisplayName.setOnClickListener(this);
     }
 
     @Override
     public int getItemCount() {
         return mProblems.size();
+    }
+
+    public void setOnProblemsFeedClickListener(OnProblemsFeedClickListener onProblemsFeedClickListener) {
+        this.onProblemsFeedClickListener = onProblemsFeedClickListener;
+    }
+
+    @Override
+    public void onClick(View view) {
+        final int viewId = view.getId();
+
+        if (viewId == R.id.problems_feed_author_avatar ||
+                viewId == R.id.problems_feed_author_display_name) {
+            if (onProblemsFeedClickListener != null) {
+                onProblemsFeedClickListener.onProfileClick(view, view.getTag().toString());
+            }
+        }
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
@@ -82,8 +110,10 @@ public class ProblemsFeedAdapter extends RecyclerView.Adapter<ProblemsFeedAdapte
         public ViewHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
-
-
         }
+    }
+
+    public interface OnProblemsFeedClickListener {
+        public void onProfileClick(View v, String tag);
     }
 }

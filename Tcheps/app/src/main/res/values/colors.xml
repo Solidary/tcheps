@@ -5,6 +5,7 @@
     <color name="color_primary_dark">#00C853</color>
     <color name="color_accent">#4CAF50</color>
     <color name="color_toolbar">#243238</color>
+    <color name="color_appbar">#EEEEEE</color>
     <color name="window_background">#B9F6CA</color>
 
     <color name="mdtp_accent_color">@color/color_primary</color>

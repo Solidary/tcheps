@@ -3,6 +3,7 @@
     package="com.tcheps.activities" >
 
     <application
+        android:name="com.tcheps.TsApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -29,6 +30,14 @@
         <activity
             android:name=".ProblemsFeedActivity"
             android:label="@string/title_activity_problems_feed" >
+        </activity>
+        <activity
+            android:name=".UserProfileActivity"
+            android:label="@string/title_activity_user_profile"
+            android:parentActivityName=".ProblemsFeedActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.tcheps.activities.ProblemsFeedActivity" />
         </activity>
     </application>
 
