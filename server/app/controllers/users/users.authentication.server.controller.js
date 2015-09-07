@@ -7,7 +7,12 @@ var _ = require('lodash'),
 	errorHandler = require('../errors.server.controller'),
 	mongoose = require('mongoose'),
 	passport = require('passport'),
-	User = mongoose.model('User');
+	logger = require('mm-node-logger')(module),
+
+	token = require('../token.controller'),
+	User = mongoose.model('User'),
+	Student = mongoose.model('Student'),
+	Teacher = mongoose.model('Teacher');
 
 /**
  * Signup
@@ -16,15 +21,24 @@ exports.signup = function(req, res) {
 	// For security measurement we remove the roles from the req.body object
 	delete req.body.roles;
 
+	console.log(req.body);
+	
 	// Init Variables
 	var user = new User(req.body);
+	if (req.body._type == 'student') {
+		user = new Student(req.body);
+	} else if (req.body._type == 'teacher') {
+		user = new Teacher(req.body);
+	} else {
+		throw new Error('Incorrect user wants to sign up');
+	}
 	var message = null;
 
 	// Add missing user fields
 	user.provider = 'local';
 	user.displayName = user.firstName + ' ' + user.lastName;
 
-	// Then save the user 
+	// Then save the user
 	user.save(function(err) {
 		if (err) {
 			return res.status(400).send({
@@ -35,13 +49,24 @@ exports.signup = function(req, res) {
 			user.password = undefined;
 			user.salt = undefined;
 
-			req.login(user, function(err) {
+			token.createToken(user, function(res, err, token) {
+				if (err) {
+					logger.error(err);
+					return res.status(400).send(err);
+				}
+
+				res.status(201).json({
+					token: token
+				});
+			}.bind(null, res));
+
+			/* req.login(user, function(err) {
 				if (err) {
 					res.status(400).send(err);
 				} else {
 					res.json(user);
 				}
-			});
+			}); */
 		}
 	});
 };
@@ -58,6 +83,18 @@ exports.signin = function(req, res, next) {
 			user.password = undefined;
 			user.salt = undefined;
 
+			token.createToken(user, function(res, err, token) {
+				if (err) {
+					logger.error(err);
+					return res.status(400).send(err);
+				}
+
+				res.status(201).json({
+					token: token
+				});
+			}.bind(null, res));
+
+			/*
 			req.login(user, function(err) {
 				if (err) {
 					res.status(400).send(err);
@@ -65,6 +102,7 @@ exports.signin = function(req, res, next) {
 					res.json(user);
 				}
 			});
+			*/
 		}
 	})(req, res, next);
 };
@@ -73,8 +111,22 @@ exports.signin = function(req, res, next) {
  * Signout
  */
 exports.signout = function(req, res) {
-	req.logout();
-	res.redirect('/');
+	/* req.logout();
+	res.redirect('/'); */
+	token.expireToken(req.headers, function(err, success) {
+		if (err) {
+			logger.error(err.message);
+
+			return res.status(401).send(err.message);
+		}
+
+		if (success) {
+			delete req.user;
+			res.sendStatus(200);
+		} else {
+			res.sendStatus(401);
+		}
+	});
 };
 
 /**

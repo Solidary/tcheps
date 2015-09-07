@@ -5,6 +5,8 @@
  */
 var _ = require('lodash'),
 	mongoose = require('mongoose'),
+	token = require('../token.controller'),
+	logger = require('mm-node-logger')(module),
 	User = mongoose.model('User');
 
 /**
@@ -32,6 +34,22 @@ exports.requiresLogin = function(req, res, next) {
 	}
 
 	next();
+};
+
+/**
+ * Require login token routing middleware
+ */
+exports.requiresLoginToken = function(req, res, next) {
+	token.verifyToken(req.headers, function(next, err, data) {
+		if (err) {
+			logger.error(err.message);
+
+			return res.status(401).send(err.message);
+		}
+
+		req.user = data;
+		next();
+	}.bind(null, next));
 };
 
 /**

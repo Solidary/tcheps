@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:paddingRight="5dp" android:paddingLeft="5dp"
+    android:paddingTop="5dp" android:paddingBottom="5dp">
+
+    <ImageView
+        android:id="@+id/users_avatar"
+        android:layout_width="60dp" android:layout_height="60dp"
+        android:padding="5dp"
+        android:clickable="true" android:background="@android:color/transparent"
+        android:layout_alignParentLeft="true"/>
+    <LinearLayout
+        android:id="@+id/users_ll"
+        android:orientation="vertical"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="5dp" android:gravity="center_vertical"
+        android:layout_toRightOf="@id/users_avatar">
+        <TextView
+            android:id="@+id/users_display_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            android:textStyle="bold" android:textSize="20sp"/>
+        <TextView
+            android:id="@+id/users_description"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            android:textStyle="italic" android:textSize="15sp"/>
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/users_follow_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Follow"
+        android:layout_alignParentRight="true"
+        android:padding="5dp"
+        android:gravity="center_horizontal|center_vertical"/>
+
+</RelativeLayout>

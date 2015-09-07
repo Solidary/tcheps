@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.tcheps.activities" >
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:name="com.tcheps.TsApplication"
         android:allowBackup="true"
@@ -34,6 +36,30 @@
         <activity
             android:name=".UserProfileActivity"
             android:label="@string/title_activity_user_profile"
+            android:parentActivityName=".ProblemsFeedActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.tcheps.activities.ProblemsFeedActivity" />
+        </activity>
+        <activity
+            android:name=".PoseProblemActivity"
+            android:label="@string/title_activity_pose_problem"
+            android:parentActivityName=".ProblemsFeedActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.tcheps.activities.ProblemsFeedActivity" />
+        </activity>
+        <activity
+            android:name=".UsersFromDescriptionActivity"
+            android:label="@string/title_activity_fetch_user_from_description"
+            android:parentActivityName=".ProblemsFeedActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.tcheps.activities.ProblemsFeedActivity" />
+        </activity>
+        <activity
+            android:name=".CommentProblemActivity"
+            android:label="@string/title_activity_comment_problem"
             android:parentActivityName=".ProblemsFeedActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"

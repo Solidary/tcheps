@@ -1,6 +1,7 @@
 package com.tcheps.models;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -15,6 +16,7 @@ public class User {
            setLastName("FOSSO");
            setEmail("fosso.mael.elvis@gmail.com");
            setDescription("PD4, Lycee Classique et Moderne de Maroua");
+           setType("student");
        }}) ;
         add(new User() {{
             setObjectId("445812");
@@ -22,6 +24,7 @@ public class User {
             setLastName("TCHEPIN");
             setEmail("emery.tchepin@gmail.com");
             setDescription("TleC, College MAZENOTH de NGaoundere");
+            setType("student");
         }}) ;
         add(new User() {{
             setObjectId("gh778h");
@@ -29,6 +32,7 @@ public class User {
             setLastName("TETKA");
             setEmail("charles.tetka@gmail.com");
             setDescription("TleD, Lycee LeClerc de Yaounde");
+            setType("student");
         }}) ;
         add(new User() {{
             setObjectId("78lls1d");
@@ -36,15 +40,52 @@ public class User {
             setLastName("BOUNOU");
             setEmail("ariel.bounou@gmail.com");
             setDescription("TleD, College Fleming de Yaounde");
+            setType("student");
+        }}) ;
+        add(new User() {{
+            setObjectId("45se12");
+            setFirstName("Mael");
+            setLastName("FOSSO");
+            setEmail("fosso.mael.elvis@gmail.com");
+            setDescription("PD4, Lycee Classique et Moderne de Maroua");
+            setType("student");
+        }}) ;
+        add(new User() {{
+            setObjectId("445812");
+            setFirstName("Emery");
+            setLastName("TCHEPIN");
+            setEmail("emery.tchepin@gmail.com");
+            setDescription("TleC, College MAZENOTH de NGaoundere");
+            setType("student");
+        }}) ;
+        add(new User() {{
+            setObjectId("gh778h");
+            setFirstName("Charles");
+            setLastName("TETKA");
+            setEmail("charles.tetka@gmail.com");
+            setDescription("TleD, Lycee LeClerc de Yaounde");
+            setType("student");
+        }}) ;
+        add(new User() {{
+            setObjectId("78lls1d");
+            setFirstName("Ariel");
+            setLastName("BOUNOU");
+            setEmail("ariel.bounou@gmail.com");
+            setDescription("TleD, College Fleming de Yaounde");
+            setType("student");
         }}) ;
     }};
 
     private String objectId;
     private String firstName;
     private String lastName;
+    private Date birthDate;
     private String displayName;
     private String email;
     private String description;
+    private String gender;
+    private String password;
+    private String type;
 
     public User() {
     }
@@ -79,6 +120,38 @@ public class User {
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
+    }
+
+    public Date getBirthDate() {
+        return birthDate;
+    }
+
+    public void setBirthDate(Date birthDate) {
+        this.birthDate = birthDate;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
     }
 
     public String getDisplayName() {

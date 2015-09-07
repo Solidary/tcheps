@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Tcheps</string>
+    <string name="app_name">Tchep\'s</string>
 
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
@@ -43,6 +43,20 @@
     <string name="title_activity_problems_feed">Problems</string>
     <string name="title_activity_user_profile">UserProfile</string>
 
+    <string name="pose_problem_description_hint">Describe your problem ..</string>
+    <string name="pose_problem_tags_hint">Tag the problems...</string>
+    <string-array name="pose_problem_circles_entries">
+        <item>Public</item>
+    </string-array>
+    <string name="pose_problem_action_submit">Submit</string>
+    <string name="pose_problem_action_cancel">Cancel</string>
+
+    <string name="comment_problem_comment_et_hint">Your comment here</string>
+    <string name="comment_problem_comment_btn">Send</string>
 <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_pose_problem">PoseProblemActivity</string>
+    <string name="title_activity_fetch_user_from_description">FetchUserFromDescriptionActivity
+    </string>
+    <string name="title_activity_comment_problem">CommentProblemActivity</string>
 </resources>

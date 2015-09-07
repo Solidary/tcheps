@@ -3,7 +3,7 @@
 module.exports = {
 	db: 'mongodb://localhost/tcheps-dev',
 	app: {
-		title: 'tchep's - Development Environment'
+		title: 'tchep\'s - Development Environment'
 	},
 	facebook: {
 		clientID: process.env.FACEBOOK_ID || 'APP_ID',
@@ -38,6 +38,19 @@ module.exports = {
 				user: process.env.MAILER_EMAIL_ID || 'MAILER_EMAIL_ID',
 				pass: process.env.MAILER_PASSWORD || 'MAILER_PASSWORD'
 			}
+		}
+	},
+
+	token: {
+		secret: process.env.TOKEN_SECRET  || 'Tchep\'s -- NGuetch',
+		expiration: process.env.TOKEN_EXPIRATION || 60 * 60 * 24
+	},
+
+	redis: {
+		host: process.env.REDIS_HOST || '127.0.0.1',
+		port: process.env.REDIS_PORT || 6379,
+		options: {
+			
 		}
 	}
 };

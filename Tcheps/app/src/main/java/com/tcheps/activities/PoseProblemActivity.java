@@ -1,0 +1,104 @@
+package com.tcheps.activities;
+
+import android.support.design.widget.CoordinatorLayout;
+import android.support.design.widget.Snackbar;
+import android.support.v7.app.ActionBarActivity;
+import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.MultiAutoCompleteTextView;
+import android.widget.Spinner;
+
+import com.android.ex.chips.BaseRecipientAdapter;
+import com.android.ex.chips.RecipientEditTextView;
+import com.android.ex.chips.recipientchip.DrawableRecipientChip;
+
+import butterknife.Bind;
+import butterknife.ButterKnife;
+
+public class PoseProblemActivity extends AppCompatActivity {
+
+    /*@Bind(R.id.pose_problem_root)
+    CoordinatorLayout ppCoordinatorLayout;*/
+    @Bind(R.id.toolbar)
+    Toolbar toolbar;
+
+    @Bind(R.id.pose_problem_subject_sp)
+    Spinner ppSubject;
+    @Bind(R.id.pose_problem_tags)
+    RecipientEditTextView ppTags;
+    @Bind(R.id.pose_problem_circles)
+    RecipientEditTextView ppCircles;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_pose_problem);
+
+        ButterKnife.bind(this);
+
+        setupToolbar();
+        ppSubject.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                ppTags.submitItem(ppSubject.getSelectedItem().toString(), " ");
+                DrawableRecipientChip[] tagsChips = ppTags.getSortedRecipients();
+                ppTags.removeMoreChip();
+                /*Snackbar
+                        .make(ppCoordinatorLayout,
+                        tagsChips[0].getOriginalText(), Snackbar.LENGTH_LONG)
+                        .show();*/
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+        setupRecipientEdit();
+    }
+
+    private void setupToolbar() {
+        toolbar.setTitle("Pose a problem");
+        setSupportActionBar(toolbar);
+
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+    }
+
+    private void setupRecipientEdit() {
+        ppTags.setTokenizer(new MultiAutoCompleteTextView.CommaTokenizer());
+        ppTags.setAdapter(new BaseRecipientAdapter(BaseRecipientAdapter.QUERY_TYPE_PHONE, this));
+
+        ppCircles.setTokenizer(new MultiAutoCompleteTextView.CommaTokenizer());
+        ppCircles.setAdapter(new BaseRecipientAdapter(BaseRecipientAdapter.QUERY_TYPE_PHONE, this));
+        ppCircles.submitItem("Public", "89 004 67");
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_pose_problem, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+
+        //noinspection SimplifiableIfStatement
+        if (id == R.id.action_settings) {
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
+
+}

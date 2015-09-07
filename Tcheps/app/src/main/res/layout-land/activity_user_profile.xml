@@ -31,8 +31,8 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:gravity="center" android:textSize="60sp"
-                            fontPath="fonts/Royal2.ttf" android:padding="60dp"
-                            android:layout_marginBottom="40dp"
+                            fontPath="fonts/Precious.ttf" android:padding="60dp"
+                            android:layout_marginBottom="40dp" android:textAllCaps="false"
                             android:background="@color/color_primary"/>
 
                         <ImageView

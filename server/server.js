@@ -19,12 +19,16 @@ var db = mongoose.connect(config.db, function(err) {
 		console.log(chalk.red(err));
 	}
 });
+mongoose.set('debug', true);
 
 // Init the express application
 var app = require('./config/express')(db);
 
 // Bootstrap passport config
 require('./config/passport')();
+
+// Bootstrap redis config
+require('./config/redis')();
 
 // Start the app by listening on <port>
 app.listen(config.port);

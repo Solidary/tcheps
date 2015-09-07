@@ -5,7 +5,10 @@
  */
 var mongoose = require('mongoose'),
 	Schema = mongoose.Schema,
-	crypto = require('crypto');
+	crypto = require('crypto'),
+
+	util = require('util'),
+	_ = require('lodash');
 
 /**
  * A Validation function for local strategy properties
@@ -24,6 +27,94 @@ var validateLocalStrategyPassword = function(password) {
 /**
  * User Schema
  */
+function BaseSchema() {
+	Schema.apply(this, arguments);
+	util.inspect(this);
+
+	this.add({
+		firstName: {
+			type: String,
+			trim: true,
+			default: '',
+			validate: [validateLocalStrategyProperty, 'Please fill in your first name']
+		},
+		lastName: {
+			type: String,
+			trim: true,
+			default: '',
+			validate: [validateLocalStrategyProperty, 'Please fill in your last name']
+		},
+		displayName: {
+			type: String,
+			trim: true
+		},
+		email: {
+			type: String,
+			trim: true,
+			unique: 'testing error message',
+			required: 'Please fill in an email',
+			lowercase: true,
+			default: '',
+			validate: [validateLocalStrategyProperty, 'Please fill in your email'],
+			match: [/.+\@.+\..+/, 'Please fill a valid email address']
+		},
+		password: {
+			type: String,
+			default: '',
+			validate: [validateLocalStrategyPassword, 'Password should be longer']
+		},
+
+		birthDate: {
+			type: Date,
+			required: true
+		},
+		gender: {
+			type: [{
+				type: String,
+				enum: ['male', 'female']
+			}],
+			required: true,
+			lowercase: true,
+		},
+
+		salt: {
+			type: String
+		},
+		provider: {
+			type: String,
+			required: 'Provider is required'
+		},
+		providerData: {},
+		additionalProvidersData: {},
+		roles: {
+			type: [{
+				type: String,
+				enum: ['user', 'admin']
+			}],
+			default: ['user']
+		},
+		updated: {
+			type: Date
+		},
+		created: {
+			type: Date,
+			default: Date.now
+		},
+		/* For reset password */
+		resetPasswordToken: {
+			type: String
+		},
+		resetPasswordExpires: {
+			type: Date
+		}
+	});
+};
+
+util.inherits(BaseSchema, Schema);
+
+var UserSchema = new BaseSchema();
+
+/*
 var UserSchema = new Schema({
 	firstName: {
 		type: String,
@@ -44,10 +135,13 @@ var UserSchema = new Schema({
 	email: {
 		type: String,
 		trim: true,
+		unique: 'testing error message',
+		required: 'Please fill in an email',
 		default: '',
 		validate: [validateLocalStrategyProperty, 'Please fill in your email'],
 		match: [/.+\@.+\..+/, 'Please fill a valid email address']
 	},
+	/*
 	username: {
 		type: String,
 		unique: 'testing error message',
@@ -59,6 +153,19 @@ var UserSchema = new Schema({
 		default: '',
 		validate: [validateLocalStrategyPassword, 'Password should be longer']
 	},
+
+	birthDate: {
+		type: date
+	},
+	gender: {
+		type: [{
+			type: String,
+			enum: ['male', 'female']
+		}],
+		required: true,
+		lowercase: true,
+	},
+
 	salt: {
 		type: String
 	},
@@ -82,7 +189,7 @@ var UserSchema = new Schema({
 		type: Date,
 		default: Date.now
 	},
-	/* For reset password */
+
 	resetPasswordToken: {
 		type: String
 	},
@@ -90,6 +197,7 @@ var UserSchema = new Schema({
 		type: Date
 	}
 });
+*/
 
 /**
  * Hook a pre save method to hash the password
@@ -144,3 +252,5 @@ UserSchema.statics.findUniqueUsername = function(username, suffix, callback) {
 };
 
 mongoose.model('User', UserSchema);
+
+module.exports = BaseSchema;

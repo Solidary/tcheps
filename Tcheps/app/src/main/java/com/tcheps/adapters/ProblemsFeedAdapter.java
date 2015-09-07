@@ -7,6 +7,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -68,9 +69,13 @@ public class ProblemsFeedAdapter extends RecyclerView.Adapter<ProblemsFeedAdapte
 
         holder.authorAvatar.setTag(problem.getAuthor().getObjectId());
         holder.authorDisplayName.setTag(problem.getAuthor().getObjectId());
+        holder.authorDescription.setTag(problem.getAuthor().getDescription() + ", " + problem.getAuthor().getType());
+        holder.comment.setTag(problem.getObjectId());
 
         holder.authorAvatar.setOnClickListener(this);
         holder.authorDisplayName.setOnClickListener(this);
+        holder.authorDescription.setOnClickListener(this);
+        holder.comment.setOnClickListener(this);
     }
 
     @Override
@@ -91,6 +96,15 @@ public class ProblemsFeedAdapter extends RecyclerView.Adapter<ProblemsFeedAdapte
             if (onProblemsFeedClickListener != null) {
                 onProblemsFeedClickListener.onProfileClick(view, view.getTag().toString());
             }
+        } else if (viewId == R.id.problems_feed_author_description) {
+            if (onProblemsFeedClickListener != null) {
+                onProblemsFeedClickListener.onUsersFromDescriptionClick(view,
+                        view.getTag().toString());
+            }
+        } else if (viewId == R.id.problems_feed_comment_btn) {
+            if (onProblemsFeedClickListener != null) {
+                onProblemsFeedClickListener.onCommentClick(view, view.getTag().toString());
+            }
         }
     }
 
@@ -107,6 +121,9 @@ public class ProblemsFeedAdapter extends RecyclerView.Adapter<ProblemsFeedAdapte
         @Bind(R.id.problems_feed_description)
         public TextView description;
 
+        @Bind(R.id.problems_feed_comment_btn)
+        public ImageButton comment;
+
         public ViewHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
@@ -115,5 +132,7 @@ public class ProblemsFeedAdapter extends RecyclerView.Adapter<ProblemsFeedAdapte
 
     public interface OnProblemsFeedClickListener {
         public void onProfileClick(View v, String tag);
+        public void onUsersFromDescriptionClick(View v, String tag);
+        public void onCommentClick(View v, String tag);
     }
 }

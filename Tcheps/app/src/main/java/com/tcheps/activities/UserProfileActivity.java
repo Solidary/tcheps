@@ -22,6 +22,7 @@ import com.tcheps.fragments.UserProfileCirclesFragment;
 import com.tcheps.fragments.UserProfileFollowersFragment;
 import com.tcheps.fragments.UserProfileFollowingFragment;
 import com.tcheps.fragments.UserProfilePostsFragment;
+import com.tcheps.fragments.UsersFragment;
 import com.tcheps.models.User;
 
 import org.w3c.dom.Text;
@@ -105,7 +106,9 @@ public class UserProfileActivity extends AppCompatActivity {
     }
 
     private void setupCollapsingToolbar() {
-        upLastName.setText(user.getLastName());
+        String lastname = user.getLastName().toLowerCase();
+//        String.valueOf(lastname[0]
+        upLastName.setText(lastname);
         /*upLastName.setImageDrawable(
                 TextDrawable.builder()
                         .beginConfig()
@@ -125,10 +128,15 @@ public class UserProfileActivity extends AppCompatActivity {
 
     private void setupViewPagerAndTabs() {
         TsPageAdapter adapter = new TsPageAdapter(getSupportFragmentManager(), this);
-        adapter.addFragment(new UserProfilePostsFragment(), "Posts");
-        adapter.addFragment(new UserProfileFollowersFragment(), "Followers");
-        adapter.addFragment(new UserProfileFollowingFragment(), "Following");
-        adapter.addFragment(new UserProfileCirclesFragment(), "Circles");
+//        adapter.addFragment(new UserProfilePostsFragment(), "Posts");
+//        adapter.addFragment(new UserProfileFollowersFragment(), "Followers");
+//        adapter.addFragment(new UserProfileFollowingFragment(), "Following");
+//        adapter.addFragment(new UserProfileCirclesFragment(), "Circles");
+
+        adapter.addFragment(new UsersFragment(User.USERS), "Posts");
+        adapter.addFragment(new UsersFragment(User.USERS), "Followers");
+        adapter.addFragment(new UsersFragment(User.USERS), "Following");
+        adapter.addFragment(new UsersFragment(User.USERS), "Circles");
         upViewPager.setAdapter(adapter);
 
         upTablayout.setupWithViewPager(upViewPager);

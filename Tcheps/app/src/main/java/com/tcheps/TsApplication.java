@@ -16,10 +16,14 @@ public class TsApplication extends Application {
         super.onCreate();
 
         CalligraphyConfig.initDefault(new CalligraphyConfig.Builder()
-                        .setDefaultFontPath("fonts/Roboto-Thin.ttf")
+                        // .setDefaultFontPath("fonts/Roboto-Thin.ttf")
                         // .setFontAttrId(R.attr.fontPath)
                         // .addCustomStyle(TextField.class, R.attr.textFieldStyle)
                         .build()
         );
+
+
+        // android:textColor="#333"
+        // android:textColorHint="#666"
     }
 }

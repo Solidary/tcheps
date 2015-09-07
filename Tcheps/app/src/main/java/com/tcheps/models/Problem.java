@@ -17,6 +17,7 @@ public class Problem {
             setTags(Arrays.asList("maths", "discriminant", "functions"));
             setCreated(new Date());
             setAuthor(User.USERS.get(2));
+            setComments(Comment.COMMENTS);
         }});
         add(new Problem() {{
             setObjectId("ej209s");
@@ -24,6 +25,7 @@ public class Problem {
             setTags(Arrays.asList("maths", "discriminant", "functions"));
             setCreated(new Date());
             setAuthor(User.USERS.get(3));
+            setComments(Comment.COMMENTS);
         }});
         add(new Problem() {{
             setObjectId("8d002f");
@@ -31,6 +33,7 @@ public class Problem {
             setTags(Arrays.asList("maths", "discriminant", "functions"));
             setCreated(new Date());
             setAuthor(User.USERS.get(0));
+            setComments(Comment.COMMENTS);
         }});
         add(new Problem() {{
             setObjectId("faj21jf");
@@ -38,6 +41,7 @@ public class Problem {
             setTags(Arrays.asList("maths", "discriminant", "functions"));
             setCreated(new Date());
             setAuthor(User.USERS.get(1));
+            setComments(Comment.COMMENTS);
         }});
         add(new Problem() {{
             setObjectId("f878dajf");
@@ -45,6 +49,7 @@ public class Problem {
             setTags(Arrays.asList("maths", "discriminant", "functions"));
             setCreated(new Date());
             setAuthor(User.USERS.get(0));
+            setComments(Comment.COMMENTS);
         }});
     }};
 
@@ -54,7 +59,10 @@ public class Problem {
     private String circle;
     private Date created;
 
+    List<Comment> comments;
+
     private User author;
+
 
     public Problem() {
     }
@@ -105,5 +113,13 @@ public class Problem {
 
     public void setAuthor(User author) {
         this.author = author;
+    }
+
+    public List<Comment> getComments() {
+        return comments;
+    }
+
+    public void setComments(List<Comment> comments) {
+        this.comments = comments;
     }
 }

@@ -14,7 +14,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:minHeight="?attr/actionBarSize"
-            android:background="@color/color_primary"
+            android:background="@color/color_toolbar"
             android:textColor="@android:color/white"
             android:theme="@style/ThemeOverlay.AppCompat.Dark"
             android:elevation="8dp"/>
@@ -28,10 +28,11 @@
         android:background="@android:color/white"/>
 
     <android.support.design.widget.FloatingActionButton
+        android:id="@+id/problems_feed_pose_problem"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="25dp"
-        android:src="@drawable/ic_add_black_24dp"
+        android:src="@drawable/ic_add_white_24dp"
         app:layout_anchor="@id/problems_feed_rv"
         app:layout_anchorGravity="bottom|end" />
 </android.support.design.widget.CoordinatorLayout>
