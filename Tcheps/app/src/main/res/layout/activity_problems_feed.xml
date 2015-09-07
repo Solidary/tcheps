@@ -3,18 +3,20 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.tcheps.activities.ProblemsFeedActivity">
+    tools:context="com.tcheps.activities.ProblemsFeedActivity"
+    android:background="@color/bg_color">
 
     <android.support.design.widget.AppBarLayout
         android:id="@+id/appBarLayout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:background="@color/bg_color">
         <android.support.v7.widget.Toolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:minHeight="?attr/actionBarSize"
-            android:background="@color/color_toolbar"
+            android:background="@color/color_primary"
             android:textColor="@android:color/white"
             android:theme="@style/ThemeOverlay.AppCompat.Dark"
             android:elevation="8dp"/>

@@ -2,15 +2,16 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
     android:layout_height="match_parent" android:orientation="vertical"
-    tools:context="com.tcheps.activities.SignUpActivity">
+    tools:context="com.tcheps.activities.SignUpActivity"
+    android:background="@color/bg_color">
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:minHeight="?attr/actionBarSize"
-        android:background="@color/color_toolbar"
-        android:textColor="@android:color/white"
+        android:background="@color/color_primary"
+        android:textColor="@color/text_color"
         android:theme="@style/ThemeOverlay.AppCompat.Dark"
         android:elevation="4dp"/>
 
@@ -74,16 +75,12 @@
             android:layout_height="wrap_content"
             android:minHeight="?android:attr/actionBarSize"
             android:orientation="horizontal">
-            <!--com.gc.materialdesign.views.ButtonFlat
-                android:id="@+id/buttonflat"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="#1E88E5"
-                android:text="Button" /-->
             <Button
                 android:id="@+id/sign_up_birth_date_btn"
                 android:layout_width="0dp" android:layout_weight="1"
-                android:layout_height="?android:attr/actionBarSize"  android:textSize="20sp"
+                android:layout_height="?android:attr/actionBarSize"
+                android:background="@color/bg_color"
+                android:textSize="20sp"
                 android:text="Birth Date" android:inputType="textCapWords"
                 android:layout_marginTop="10dp" android:layout_marginBottom="10dp"/>
             <RadioGroup
@@ -168,7 +165,8 @@
         android:id="@+id/sign_up_register_btn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Register" android:textColor="@android:color/white"
+        android:text="Register"
+        android:textColor="@android:color/white"
         android:inputType="textCapWords"
         android:background="?attr/colorPrimary"
         android:gravity="center"  android:textSize="25sp"

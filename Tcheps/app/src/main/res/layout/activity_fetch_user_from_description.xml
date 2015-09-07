@@ -11,22 +11,23 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <android.support.v7.widget.Toolbar
+        <!--android.support.v7.widget.Toolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:background="@color/color_toolbar"
             android:textColor="@android:color/white"
             android:theme="@style/ThemeOverlay.AppCompat.Dark"
-            android:elevation="4dp"/>
+            android:elevation="4dp"/-->
 
         <android.support.design.widget.TabLayout
             android:id="@+id/user_from_description_tab_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/color_toolbar"
-            app:tabTextColor="@android:color/white"
-            app:tabSelectedTextColor="@android:color/white"
+            android:background="@color/bg_color"
+            app:tabPadding="0dp"
+            app:tabTextColor="@android:color/black"
+            app:tabSelectedTextColor="@color/color_primary"
             app:tabIndicatorColor="@color/color_primary"
             app:tabIndicatorHeight="5dp" app:tabMode="fixed"
             app:tabGravity="fill"/>

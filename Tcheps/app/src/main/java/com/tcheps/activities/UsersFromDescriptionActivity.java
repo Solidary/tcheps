@@ -39,7 +39,7 @@ public class UsersFromDescriptionActivity extends AppCompatActivity {
     ViewPager ufdViewPager;
     @Bind(R.id.user_from_description_tab_layout)
     TabLayout ufdTabLayout;
-    @Bind(R.id.toolbar)
+    // @Bind(R.id.toolbar)
     Toolbar toolbar;
 
     @Override
@@ -48,7 +48,7 @@ public class UsersFromDescriptionActivity extends AppCompatActivity {
         setContentView(R.layout.activity_fetch_user_from_description);
         ButterKnife.bind(this);
 
-        setupToolbar();
+        //setupToolbar();
         setupViewPagerAndTabs();
     }
 

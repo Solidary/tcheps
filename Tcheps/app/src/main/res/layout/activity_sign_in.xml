@@ -4,12 +4,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@drawable/sign_in_bg_3"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:orientation="vertical"
-    android:background="@color/color_primary">
+    android:paddingBottom="@dimen/activity_vertical_margin">
 
     <RelativeLayout android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -20,15 +20,16 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:background="@android:color/white"
-            android:padding="40dp">
+            android:padding="40dp"
+            android:background="@color/bg_color">
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="60sp"
+                android:textSize="80sp"
                 android:text="@string/app_name"
-                android:gravity="center_horizontal"
+                android:textColor="@color/color_primary"
+                android:gravity="center_horizontal|center_vertical"
                 fontPath="fonts/Precious.ttf" android:textAllCaps="false"/>
             <!--ImageView
                 android:id="@+id/sign_in_lock_iv"
@@ -37,15 +38,14 @@
                 android:src="@drawable/sign_in_lock"
                 android:layout_gravity="center_horizontal"/-->
 
-            <TextView
+            <!--TextView
                 android:layout_width="match_parent"
                 android:layout_height="0dp" android:layout_weight="1"
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:textSize="30sp"
                 android:gravity="center"
                 android:text="@string/sign_in_activity_title"
-                android:textColor="@color/color_primary"
-                android:layout_marginTop="10dp" android:layout_marginBottom="10dp"/>
+                android:layout_marginTop="10dp" android:layout_marginBottom="10dp"-->
             <EditText
                 android:id="@+id/sign_in_email_et"
                 android:layout_width="match_parent"
@@ -84,18 +84,20 @@
                 android:id="@+id/sign_in_sign_up_student_btn"
                 android:layout_width="0dp" android:layout_weight="1"
                 android:layout_height="wrap_content"
-                android:text="Sign Up As Student" android:textColor="@android:color/white"
+                android:text="Sign Up As Student"
+                android:textColor="@color/text_color"
                 android:inputType="textCapWords"
-                android:background="?attr/colorPrimary"
+                android:background="@color/color_primary"
                 android:gravity="center" android:textSize="20sp"
                 android:layout_marginRight="10dp"/>
             <Button
                 android:id="@+id/sign_in_sign_up_teacher_btn"
                 android:layout_width="0dp" android:layout_weight="1"
                 android:layout_height="wrap_content"
-                android:text="Sign Up As Teacher" android:textColor="@android:color/white"
+                android:text="Sign Up As Teacher"
+                android:textColor="@color/text_color"
                 android:inputType="textCapWords"
-                android:background="?attr/colorPrimary"
+                android:background="@color/color_primary"
                 android:gravity="center" android:textSize="20sp"
                 android:layout_marginLeft="10dp" />
         </LinearLayout>
