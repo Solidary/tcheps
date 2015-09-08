@@ -60,7 +60,7 @@ public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.ViewHolder> 
 
         holder.uAvatar.setTag(user.getObjectId());
         holder.uDisplayName.setTag(user.getObjectId());
-        holder.uDescription.setTag(user.getDescription() + ", " + user.getType());
+        holder.uDescription.setTag(user.getDescription() + ", " /*+ user.getType()*/);
 
         holder.uAvatar.setOnClickListener(this);
         holder.uDisplayName.setOnClickListener(this);

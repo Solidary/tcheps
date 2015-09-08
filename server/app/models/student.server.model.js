@@ -4,14 +4,15 @@
  * Module dependencies.
  */
 var mongoose = require('mongoose'),
+	extend = require('mongoose-schema-extend'),
 	Schema = mongoose.Schema,
 
-	UserSchema = require('./user.server.model')();
+	UserSchema = require('./user.server.model');
 
 /**
  * Student Schema
  */
-var StudentSchema = new UserSchema({
+var StudentSchema = UserSchema.extend({
 	// Student model fields
 	// ...
 
@@ -28,5 +29,5 @@ var StudentSchema = new UserSchema({
 	}
 });
 
-// mongoose.model('Student', StudentSchema);
-mongoose.model('User').discriminator('student', StudentSchema);
+mongoose.model('Student', StudentSchema);
+// mongoose.model('User').discriminator('student', StudentSchema);

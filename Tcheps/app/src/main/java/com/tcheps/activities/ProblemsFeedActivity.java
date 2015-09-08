@@ -70,7 +70,7 @@ public class ProblemsFeedActivity extends AppCompatActivity implements
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        // getMenuInflater().inflate(R.menu.menu_problems_feed, menu);
+        getMenuInflater().inflate(R.menu.menu_problems_feed, menu);
         return true;
     }
 

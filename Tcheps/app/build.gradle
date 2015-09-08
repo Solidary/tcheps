@@ -36,16 +36,23 @@ dependencies {
         transitive = true
     }
     compile 'com.nineoldandroids:library:2.4.0'
-
+    compile 'com.github.markushi:circlebutton:1.1'
     // compile 'com.klinkerapps:android-chips:1.0.1@aar'
     compile('com.klinkerapps:android-chips:1.0.1@aar') {
         transitive = true
     }
 
+    compile 'com.squareup.retrofit:retrofit:1.9.0'
+    compile 'com.squareup.okhttp:okhttp:2.2.0'
+    compile 'com.google.code.gson:gson:2.3'
+
+    /*
     compile 'com.squareup.okhttp:okhttp:2.4.0'
     compile 'com.squareup.retrofit:retrofit:2.0.0-beta1'
     compile 'com.squareup.retrofit:converter-gson:2.0.0-beta1'
+    compile "com.squareup.retrofit:adapter-rxjava:2.0.0-beta1"
     compile 'com.google.code.gson:gson:2.+'
+    */
 
     compile project(':library')
 }

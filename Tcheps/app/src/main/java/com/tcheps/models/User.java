@@ -1,5 +1,7 @@
 package com.tcheps.models;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -16,7 +18,7 @@ public class User {
            setLastName("FOSSO");
            setEmail("fosso.mael.elvis@gmail.com");
            setDescription("PD4, Lycee Classique et Moderne de Maroua");
-           setType("student");
+           // setType("student");
        }}) ;
         add(new User() {{
             setObjectId("445812");
@@ -24,7 +26,7 @@ public class User {
             setLastName("TCHEPIN");
             setEmail("emery.tchepin@gmail.com");
             setDescription("TleC, College MAZENOTH de NGaoundere");
-            setType("student");
+            // setType("student");
         }}) ;
         add(new User() {{
             setObjectId("gh778h");
@@ -32,7 +34,7 @@ public class User {
             setLastName("TETKA");
             setEmail("charles.tetka@gmail.com");
             setDescription("TleD, Lycee LeClerc de Yaounde");
-            setType("student");
+            // setType("student");
         }}) ;
         add(new User() {{
             setObjectId("78lls1d");
@@ -40,7 +42,7 @@ public class User {
             setLastName("BOUNOU");
             setEmail("ariel.bounou@gmail.com");
             setDescription("TleD, College Fleming de Yaounde");
-            setType("student");
+            // setType("student");
         }}) ;
         add(new User() {{
             setObjectId("45se12");
@@ -48,7 +50,7 @@ public class User {
             setLastName("FOSSO");
             setEmail("fosso.mael.elvis@gmail.com");
             setDescription("PD4, Lycee Classique et Moderne de Maroua");
-            setType("student");
+            // setType("student");
         }}) ;
         add(new User() {{
             setObjectId("445812");
@@ -56,7 +58,7 @@ public class User {
             setLastName("TCHEPIN");
             setEmail("emery.tchepin@gmail.com");
             setDescription("TleC, College MAZENOTH de NGaoundere");
-            setType("student");
+            // setType("student");
         }}) ;
         add(new User() {{
             setObjectId("gh778h");
@@ -64,7 +66,7 @@ public class User {
             setLastName("TETKA");
             setEmail("charles.tetka@gmail.com");
             setDescription("TleD, Lycee LeClerc de Yaounde");
-            setType("student");
+            // setType("student");
         }}) ;
         add(new User() {{
             setObjectId("78lls1d");
@@ -72,20 +74,27 @@ public class User {
             setLastName("BOUNOU");
             setEmail("ariel.bounou@gmail.com");
             setDescription("TleD, College Fleming de Yaounde");
-            setType("student");
+            //setType("student");
         }}) ;
     }};
 
+    @SerializedName("_id")
     private String objectId;
+    @SerializedName("firstName")
     private String firstName;
+    @SerializedName("lastName")
     private String lastName;
+    @SerializedName("birthDate")
     private Date birthDate;
+    @SerializedName("displayName")
     private String displayName;
+    @SerializedName("email")
     private String email;
     private String description;
+    @SerializedName("gender")
     private String gender;
+    @SerializedName("password")
     private String password;
-    private String type;
 
     public User() {
     }
@@ -137,7 +146,7 @@ public class User {
     public void setPassword(String password) {
         this.password = password;
     }
-
+    /*
     public String getType() {
         return type;
     }
@@ -145,7 +154,7 @@ public class User {
     public void setType(String type) {
         this.type = type;
     }
-
+    */
     public String getGender() {
         return gender;
     }

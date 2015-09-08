@@ -4,6 +4,7 @@
  * Module dependencies.
  */
 var mongoose = require('mongoose'),
+	extend = require('mongoose-schema-extend'),
 	Schema = mongoose.Schema,
 
 	UserSchema = require('./user.server.model');
@@ -11,7 +12,7 @@ var mongoose = require('mongoose'),
 /**
  * Teacher Schema
  */
-var TeacherSchema = new Schema({
+var TeacherSchema = UserSchema.extend({
 	// Teacher model fields
 	// ...
 
@@ -34,5 +35,5 @@ var TeacherSchema = new Schema({
 	}
 });
 
-// mongoose.model('Teacher', TeacherSchema);
-mongoose.model('User').discriminator('teacher', TeacherSchema);
+mongoose.model('Teacher', TeacherSchema);
+// mongoose.model('User').discriminator('teacher', TeacherSchema);

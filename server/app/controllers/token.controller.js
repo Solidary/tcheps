@@ -4,7 +4,7 @@ var jwt = require('jsonwebtoken');
 var redis = require('../../config/redis');
 var config = require('../../config/config');
 
-extractToken = function(headers) {
+var extractToken = function(headers) {
     if (headers == null) {
         throw new Error('headers is null');
     }
@@ -28,7 +28,7 @@ extractToken = function(headers) {
     return token;
 };
 
-createToken = function(payload, cb) {
+var createToken = function(payload, cb) {
     var ttl = config.token.expiration;
 
     if (payload != null && typeof payload !== 'object') {
@@ -54,7 +54,7 @@ createToken = function(payload, cb) {
     }.bind(null, token));
 };
 
-expireToken = function(headers, cp) {
+var expireToken = function(headers, cp) {
     try {
         var token = extractToken(headers);
 
@@ -78,7 +78,7 @@ expireToken = function(headers, cp) {
     }
 };
 
-verifyToken = function(headers, cb) {
+var verifyToken = function(headers, cb) {
     try {
         var token = extractToken(headers);
 

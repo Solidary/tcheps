@@ -11,7 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:minHeight="?attr/actionBarSize"
-        android:background="@color/color_toolbar"
+        android:background="@color/color_primary"
         android:textColor="@android:color/white"
         android:theme="@style/ThemeOverlay.AppCompat.Dark"
         android:elevation="4dp"/>
@@ -207,16 +207,29 @@
             <EditText
                 android:id="@+id/comment_problem_comment_et"
                 android:layout_width="0dp" android:layout_weight="1"
-                android:layout_height="wrap_content" android:hint="@string/comment_problem_comment_et_hint"
-                android:singleLine="false"/>
+                android:layout_height="wrap_content"
+                android:hint="@string/comment_problem_comment_et_hint"
+                android:textColor="@android:color/black"
+                android:singleLine="false"
+                android:layout_gravity="bottom"/>
+
+            <!--at.markushi.ui.CircleButton
+                android:id="@+id/comment_problem_comment_btn"
+                android:layout_width="64dip"
+                android:layout_height="64dip"
+                android:src="@drawable/ic_send_white_36dp"
+                android:layout_gravity="center_horizontal|center_vertical"
+                app:cb_color="#009688"
+                app:cb_pressedRingWidth="8dip" /-->
 
             <ImageButton
                 android:id="@+id/comment_problem_comment_btn"
-                android:layout_width="72dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal|center_vertical"
-                android:background="@drawable/bg_circle_background"
-                android:src="@drawable/ic_send_black_48dp"/>
+                android:layout_gravity="bottom"
+                android:background="@drawable/bg_circle_btn"
+                android:padding="10dp"
+                android:src="@drawable/ic_send_white_36dp"/>
         </LinearLayout>
     </LinearLayout>
 </LinearLayout>

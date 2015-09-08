@@ -42,4 +42,14 @@ public class Teacher extends User {
     public String getDescription() {
         return subject + ", " + placeName;
     }
+
+    @Override
+    public String toString() {
+        return "Teacher{" +
+                "placeType='" + placeType + '\'' +
+                ", placeName='" + placeName + '\'' +
+                ", subject='" + subject + '\'' +
+                ", _type='" + _type + '\'' +
+                '}';
+    }
 }

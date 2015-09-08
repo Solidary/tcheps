@@ -22,7 +22,7 @@ exports.signup = function(req, res) {
 	delete req.body.roles;
 
 	console.log(req.body);
-	
+
 	// Init Variables
 	var user = new User(req.body);
 	if (req.body._type == 'student') {
@@ -30,6 +30,7 @@ exports.signup = function(req, res) {
 	} else if (req.body._type == 'teacher') {
 		user = new Teacher(req.body);
 	} else {
+		console.log(user);
 		throw new Error('Incorrect user wants to sign up');
 	}
 	var message = null;
@@ -56,8 +57,13 @@ exports.signup = function(req, res) {
 				}
 
 				res.status(201).json({
+					user: user,
 					token: token
 				});
+				/*user.token = token;
+				res.status(201).json({
+					user: user,
+				});*/
 			}.bind(null, res));
 
 			/* req.login(user, function(err) {
@@ -90,6 +96,7 @@ exports.signin = function(req, res, next) {
 				}
 
 				res.status(201).json({
+					user: user,
 					token: token
 				});
 			}.bind(null, res));

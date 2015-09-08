@@ -28,7 +28,10 @@ var app = require('./config/express')(db);
 require('./config/passport')();
 
 // Bootstrap redis config
-require('./config/redis')();
+require('./config/redis');
+
+// Bootstrap cors config
+require('./config/cors')(app);
 
 // Start the app by listening on <port>
 app.listen(config.port);

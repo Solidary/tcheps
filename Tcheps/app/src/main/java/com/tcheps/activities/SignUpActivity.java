@@ -3,6 +3,7 @@ package com.tcheps.activities;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -18,17 +19,26 @@ import com.tcheps.models.Teacher;
 import com.tcheps.models.User;
 import com.tcheps.restful.TsRetrofit;
 import com.tcheps.restful.TsServiceGenerator;
+import com.tcheps.restful.error.TsRetrofitError;
 import com.tcheps.restful.interfaces.UserAuthentication;
+import com.tcheps.restful.models.SignResponse;
 import com.wdullaer.materialdatetimepicker.date.DatePickerDialog;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import retrofit.Callback;
+import retrofit.RetrofitError;
+import retrofit.client.Header;
+import retrofit.client.Response;
+import retrofit.http.Body;
+import retrofit.mime.TypedByteArray;
 
 public class SignUpActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener {
 
@@ -149,9 +159,51 @@ public class SignUpActivity extends AppCompatActivity implements DatePickerDialo
         Bundle bundle = getIntent().getExtras();
         _type = bundle.getString(ARG_TYPE_USER);
 
-        // User user = new User();
+        User user = new User();
+        user.setFirstName(suFirstName.getText().toString());
+        user.setLastName(suLastName.getText().toString());
+        user.setEmail(suEmail.getText().toString());
+        try {
+            SimpleDateFormat format = new SimpleDateFormat("yyyy - MM - dd");
+            Log.d("tchep's", "BirthDate : " + suBirthDate.getText().toString());
+            user.setBirthDate(format.parse(suBirthDate.getText().toString()));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        if (suPassword.getText().toString().equals(suPasswordConfirmation.getText().toString())) {
+            user.setPassword(suPassword.getText().toString());
+        }
 
         UserAuthentication userAuthentication = TsServiceGenerator.create(UserAuthentication.class);
+        // User tsUser = userAuthentication.signUp(user);
+        /*userAuthentication.signUp(user, new Callback<User>() {
+            @Override
+            public void success(User user, Response response) {
+
+            }
+
+            @Override
+            public void failure(RetrofitError error) {
+
+            }
+        });
+        */
+
+        String gender = "unknown";
+        if (suGender.getCheckedRadioButtonId() != -1) {
+            int id = suGender.getCheckedRadioButtonId();
+            switch (id) {
+                case R.id.sign_up_gender_male_rb:
+                    gender = "male";
+                    break;
+                case R.id.sign_up_gender_female_rb:
+                    gender = "female";
+                    break;
+                default:
+                    gender = "unknown";
+                    break;
+            }
+        }
 
         if (_type.equals("student")) {
             Student student = new Student();
@@ -159,7 +211,7 @@ public class SignUpActivity extends AppCompatActivity implements DatePickerDialo
             student.setLastName(suLastName.getText().toString());
             student.setEmail(suEmail.getText().toString());
             try {
-                SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+                SimpleDateFormat format = new SimpleDateFormat("yyyy - MM - dd");
                 student.setBirthDate(format.parse(suBirthDate.getText().toString()));
             } catch (ParseException e) {
                 e.printStackTrace();
@@ -167,11 +219,25 @@ public class SignUpActivity extends AppCompatActivity implements DatePickerDialo
             if (suPassword.getText().toString().equals(suPasswordConfirmation.getText().toString())) {
                 student.setPassword(suPassword.getText().toString());
             }
+            student.setGender(gender);
 
             student.setLevel(suStudentLevel.getText().toString());
             student.setSchool(suStudentSchool.getText().toString());
 
             // User createdUser = userAuthentication.signUp(student);
+            userAuthentication.signUp(student, new Callback<SignResponse>() {
+                @Override
+                public void success(SignResponse signResponse, Response response) {
+                    Log.d("Tchep's", signResponse.getToken());
+                    Log.d("Tchep's", response.getUrl() + " -- " + response.getStatus());
+                }
+
+                @Override
+                public void failure(RetrofitError error) {
+                    TsRetrofitError body = (TsRetrofitError)error.getBodyAs(TsRetrofitError.class);
+                    Log.e("Tchep's", error.getMessage());
+                }
+            });
         } else if (bundle.getString(ARG_TYPE_USER).equals("teacher")) {
             Teacher teacher = new Teacher();
 
@@ -179,7 +245,7 @@ public class SignUpActivity extends AppCompatActivity implements DatePickerDialo
             teacher.setLastName(suLastName.getText().toString());
             teacher.setEmail(suEmail.getText().toString());
             try {
-                SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+                SimpleDateFormat format = new SimpleDateFormat("yyyy - MM - dd");
                 teacher.setBirthDate(format.parse(suBirthDate.getText().toString()));
             } catch (ParseException e) {
                 e.printStackTrace();
@@ -187,12 +253,26 @@ public class SignUpActivity extends AppCompatActivity implements DatePickerDialo
             if (suPassword.getText().toString().equals(suPasswordConfirmation.getText().toString())) {
                 teacher.setPassword(suPassword.getText().toString());
             }
+            teacher.setGender(gender);
 
             teacher.setPlaceType(suTeacherPlaceType.getSelectedItem().toString());
             teacher.setPlaceName(suTeacherPlaceName.getText().toString());
             teacher.setSubject(suTeacherSubjects.getSelectedItem().toString());
 
             // User createdUser = userAuthentication.signUp(teacher);
+            userAuthentication.signUp(teacher, new Callback<Teacher>() {
+                @Override
+                public void success(Teacher teacher, Response response) {
+                    Log.d("Tchep's", teacher.toString());
+                    Log.d("Tchep's", response.getReason());
+                    Log.d("Tchep's", response.getUrl() + " -- " + response.getStatus());
+                }
+
+                @Override
+                public void failure(RetrofitError error) {
+                    Log.e("Tchep's", error.getMessage().toString());
+                }
+            });
         }
 
 

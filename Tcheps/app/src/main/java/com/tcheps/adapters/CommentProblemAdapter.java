@@ -62,7 +62,7 @@ public class CommentProblemAdapter extends RecyclerView.Adapter<CommentProblemAd
 
         holder.authorAvatar.setTag(problem.getAuthor().getObjectId());
         holder.authorDisplayName.setTag(problem.getAuthor().getObjectId());
-        holder.authorDescription.setTag(problem.getAuthor().getDescription() + ", " + problem.getAuthor().getType());
+        holder.authorDescription.setTag(problem.getAuthor().getDescription() + ", " /*+ problem.getAuthor().getType()*/);
 
         holder.authorAvatar.setOnClickListener(this);
         holder.authorDisplayName.setOnClickListener(this);
