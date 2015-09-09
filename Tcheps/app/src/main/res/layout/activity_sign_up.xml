@@ -161,16 +161,29 @@
 
     </LinearLayout>
 
-    <Button
+    <com.dd.CircularProgressButton
+        android:id="@+id/sign_up_register_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/activity_horizontal_margin"
+        android:padding="15dp"
+        android:textColor="@android:color/white"
+        android:background="@color/color_primary"
+        app:cpb_textIdle="Register"
+        app:cpb_cornerRadius="48dp"
+        app:cpb_iconComplete="@drawable/ic_done_white_24dp"/>
+
+    <!--Button
         android:id="@+id/sign_up_register_btn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Register"
-        android:textColor="@android:color/white"
+        android:textColor="@color/color_primary"
         android:inputType="textCapWords"
-        android:background="?attr/colorPrimary"
+        android:background="@drawable/btn_border_oval"
         android:gravity="center"  android:textSize="25sp"
         android:layout_margin="@dimen/activity_horizontal_margin"
-        android:layout_gravity="bottom|center" />
+        android:padding="15dp"
+        android:layout_gravity="bottom|center" /-->
 
 </LinearLayout>

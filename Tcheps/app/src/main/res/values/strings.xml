@@ -59,4 +59,7 @@
     <string name="title_activity_fetch_user_from_description">FetchUserFromDescriptionActivity
     </string>
     <string name="title_activity_comment_problem">CommentProblemActivity</string>
+
+    <string name="authenticator_account_type">Full Access</string>
+    <string name="authenticator_label">Full access to an Tchep\'s account</string>
 </resources>

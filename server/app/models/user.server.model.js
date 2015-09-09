@@ -71,10 +71,8 @@ var UserSchema = new Schema({
 		required: true
 	},
 	gender: {
-		type: [{
-			type: String,
-			enum: ['male', 'female']
-		}],
+		type: String,
+		enum: ['male', 'female'],
 		required: true,
 		lowercase: true,
 	},

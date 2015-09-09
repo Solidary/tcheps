@@ -12,33 +12,26 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
-import android.widget.TextView;
 
 import com.tcheps.models.Student;
 import com.tcheps.models.Teacher;
 import com.tcheps.models.User;
-import com.tcheps.restful.TsRetrofit;
 import com.tcheps.restful.TsServiceGenerator;
 import com.tcheps.restful.error.TsRetrofitError;
-import com.tcheps.restful.interfaces.UserAuthentication;
+import com.tcheps.restful.services.UserAuthentication;
 import com.tcheps.restful.models.SignResponse;
 import com.wdullaer.materialdatetimepicker.date.DatePickerDialog;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Date;
-import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import retrofit.Callback;
 import retrofit.RetrofitError;
-import retrofit.client.Header;
 import retrofit.client.Response;
-import retrofit.http.Body;
-import retrofit.mime.TypedByteArray;
 
 public class SignUpActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener {
 
@@ -260,7 +253,7 @@ public class SignUpActivity extends AppCompatActivity implements DatePickerDialo
             teacher.setSubject(suTeacherSubjects.getSelectedItem().toString());
 
             // User createdUser = userAuthentication.signUp(teacher);
-            userAuthentication.signUp(teacher, new Callback<Teacher>() {
+            /*userAuthentication.signUp(teacher, new Callback<Teacher>() {
                 @Override
                 public void success(Teacher teacher, Response response) {
                     Log.d("Tchep's", teacher.toString());
@@ -272,7 +265,7 @@ public class SignUpActivity extends AppCompatActivity implements DatePickerDialo
                 public void failure(RetrofitError error) {
                     Log.e("Tchep's", error.getMessage().toString());
                 }
-            });
+            });*/
         }
 
 

@@ -3,6 +3,8 @@ package com.tcheps.restful.models;
 import com.google.gson.annotations.SerializedName;
 import com.tcheps.models.User;
 
+import org.parceler.Parcel;
+
 /**
  * Created by mael-fosso on 9/8/15.
  */

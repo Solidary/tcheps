@@ -60,9 +60,9 @@ public class ProblemsFeedAdapter extends RecyclerView.Adapter<ProblemsFeedAdapte
             TextDrawable.builder()
                 .buildRound(problem.getAuthor().getInitials(), rc)
         );
-        holder.statImgLikers.setImageDrawable(Utils.getTintedDrawable(mContext.getResources(),
+        /*holder.statImgLikers.setImageDrawable(Utils.getTintedDrawable(mContext.getResources(),
                 R.drawable.ic_favorite_black_18dp,
-                rc));
+                rc));*/
         holder.authorDisplayName.setText(problem.getAuthor().getDisplayName());
         holder.authorDescription.setText(problem.getAuthor().getDescription());
         holder.description.setText(problem.getDescription());
@@ -109,8 +109,8 @@ public class ProblemsFeedAdapter extends RecyclerView.Adapter<ProblemsFeedAdapte
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        @Bind(R.id.problems_feed_stats_likers_iv)
-        public ImageView statImgLikers;
+        /*@Bind(R.id.problems_feed_stats_likers_iv)
+        public ImageView statImgLikers;*/
 
         @Bind(R.id.problems_feed_author_avatar)
         public ImageView authorAvatar;

@@ -13,7 +13,7 @@ import retrofit.converter.GsonConverter;
  */
 public class TsRetrofit {
 
-    public final static String TS_API_URL = "http://192.168.56.1:3000";
+    public final static String TS_BASE_API_URL = "http://192.168.56.1:3000";
 
     /*
     public final static Retrofit TS_RETROFIT = new Retrofit.Builder()
@@ -23,7 +23,7 @@ public class TsRetrofit {
             .build();
             */
     public final static RestAdapter TS_RETROFIT = new RestAdapter.Builder()
-            .setEndpoint(TS_API_URL)
+            .setEndpoint(TS_BASE_API_URL)
             .setClient(new OkClient(new OkHttpClient()))
             .setLogLevel(RestAdapter.LogLevel.FULL)
             .setConverter(new GsonConverter(new GsonBuilder().create()))

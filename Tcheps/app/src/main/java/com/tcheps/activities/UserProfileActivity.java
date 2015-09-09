@@ -106,7 +106,10 @@ public class UserProfileActivity extends AppCompatActivity {
     }
 
     private void setupCollapsingToolbar() {
+        CharSequence name = user.getLastName().toLowerCase().toString();
+
         String lastname = user.getLastName().toLowerCase();
+        // lastname. = lastname.toUpperCase().charAt(0);
 //        String.valueOf(lastname[0]
         upLastName.setText(lastname);
         /*upLastName.setImageDrawable(

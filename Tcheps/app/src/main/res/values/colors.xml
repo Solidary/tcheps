@@ -2,11 +2,12 @@
 <resources>
     <color name="text_color">#FFFFFF</color>
     <color name="color_usage">#009688</color>
-    <color name="color_primary">#009688</color>
+    <color name="color_primary">#1ECD97</color>
     <color name="color_primary_dark">#00C853</color>
     <color name="color_accent">#4CAF50</color>
     <color name="color_toolbar">#243238</color>
     <color name="color_appbar">#EEEEEE</color>
+    <color name="color_btn_no_action">#E0E0E0</color>
     <color name="bg_color">#FFFFFF</color>
 
     <color name="mdtp_accent_color">@color/color_primary</color>
