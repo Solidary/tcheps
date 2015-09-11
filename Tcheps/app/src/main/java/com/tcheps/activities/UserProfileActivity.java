@@ -9,6 +9,7 @@ import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ImageView;
@@ -25,6 +26,7 @@ import com.tcheps.fragments.UserProfilePostsFragment;
 import com.tcheps.fragments.UsersFragment;
 import com.tcheps.models.User;
 
+// import org.parceler.apache.commons.lang.WordUtils;
 import org.w3c.dom.Text;
 
 import butterknife.Bind;
@@ -106,12 +108,13 @@ public class UserProfileActivity extends AppCompatActivity {
     }
 
     private void setupCollapsingToolbar() {
-        CharSequence name = user.getLastName().toLowerCase().toString();
-
-        String lastname = user.getLastName().toLowerCase();
-        // lastname. = lastname.toUpperCase().charAt(0);
-//        String.valueOf(lastname[0]
-        upLastName.setText(lastname);
+        String lastname = user.getLastName().substring(0, 1).toUpperCase() +
+                user.getLastName().substring(1).toLowerCase();
+        String firstname = user.getFirstName().substring(0, 1).toUpperCase() +
+                user.getFirstName().substring(1).toLowerCase();
+            Log.d("Tcheps", "setupCollapsingToolbar >>> " + lastname);
+        // String lastname = WordUtils.capitalize(user.getLastName());
+        upLastName.setText(firstname + " " + lastname);
         /*upLastName.setImageDrawable(
                 TextDrawable.builder()
                         .beginConfig()

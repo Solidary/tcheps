@@ -60,6 +60,6 @@
     </string>
     <string name="title_activity_comment_problem">CommentProblemActivity</string>
 
-    <string name="authenticator_account_type">Full Access</string>
-    <string name="authenticator_label">Full access to an Tchep\'s account</string>
+    <string name="authenticator_account_type">com.tcheps</string>
+    <string name="authenticator_label">@string/app_name</string>
 </resources>

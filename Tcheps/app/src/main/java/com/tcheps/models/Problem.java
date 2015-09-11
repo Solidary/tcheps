@@ -1,5 +1,7 @@
 package com.tcheps.models;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
@@ -53,10 +55,16 @@ public class Problem {
         }});
     }};
 
+    @SerializedName("_id")
     private String objectId;
+    @SerializedName("description")
     private String description;
+    @SerializedName("subject")
+    private String subject;
     private List<String> tags;
+    @SerializedName("circle")
     private String circle;
+    @SerializedName("created")
     private Date created;
 
     List<Comment> comments;
@@ -81,6 +89,14 @@ public class Problem {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public String getSubject() {
+        return subject;
+    }
+
+    public void setSubject(String subject) {
+        this.subject = subject;
     }
 
     public List<String> getTags() {
@@ -121,5 +137,15 @@ public class Problem {
 
     public void setComments(List<Comment> comments) {
         this.comments = comments;
+    }
+
+    @Override
+    public String toString() {
+        return "Problem{" +
+                "objectId='" + objectId + '\'' +
+                ", description='" + description + '\'' +
+                ", subject='" + subject + '\'' +
+                ", created=" + created +
+                '}';
     }
 }

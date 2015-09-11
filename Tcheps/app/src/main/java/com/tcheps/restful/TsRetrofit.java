@@ -15,13 +15,13 @@ public class TsRetrofit {
 
     public final static String TS_BASE_API_URL = "http://192.168.56.1:3000";
 
-    /*
-    public final static Retrofit TS_RETROFIT = new Retrofit.Builder()
-            .baseUrl(TS_API_URL)
+
+    /*public final static Retrofit TS_RETROFIT = new Retrofit.Builder()
+            .baseUrl(TS_BASE_API_URL)
             .addConverterFactory(GsonConverterFactory.create())
             .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
-            .build();
-            */
+            .build();*/
+
     public final static RestAdapter TS_RETROFIT = new RestAdapter.Builder()
             .setEndpoint(TS_BASE_API_URL)
             .setClient(new OkClient(new OkHttpClient()))

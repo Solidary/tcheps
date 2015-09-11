@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
-    <PreferenceCategory android:title="@string/app_name"/>
+    <!--PreferenceCategory android:title="@string/app_name"/>
     <CheckBoxPreference
         android:key="isDebug"
         android:summary="Connecting to a debug server instead of production server"
@@ -8,5 +8,5 @@
     <SwitchPreference
         android:key="logsVerbose"
         android:summary="Increase logging verbosity for Logcat output"
-        android:title="Debug Logs"/>
+        android:title="Debug Logs"/-->
 </PreferenceScreen>

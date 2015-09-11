@@ -1,7 +1,6 @@
 package com.tcheps.activities;
 
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -9,22 +8,29 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 
 import com.amulyakhare.textdrawable.TextDrawable;
 import com.amulyakhare.textdrawable.util.ColorGenerator;
-import com.tcheps.activities.R;
+import com.squareup.otto.Subscribe;
+import com.tcheps.TsApplication;
 import com.tcheps.adapters.ProblemsFeedAdapter;
 import com.tcheps.models.Problem;
 import com.tcheps.models.User;
+import com.tcheps.restful.TsServiceGenerator;
+import com.tcheps.restful.api.ProblemsAPI;
+import com.tcheps.restful.tasks.ProblemsListTask;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 public class ProblemsFeedActivity extends AppCompatActivity implements
         ProblemsFeedAdapter.OnProblemsFeedClickListener {
@@ -38,11 +44,16 @@ public class ProblemsFeedActivity extends AppCompatActivity implements
     @Bind(R.id.problems_feed_pose_problem)
     FloatingActionButton pfPoseProblem;
 
+    List<Problem> problems = Collections.emptyList();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_problems_feed);
         ButterKnife.bind(this);
+
+        ProblemsListTask problemsListTask = new ProblemsListTask();
+        problemsListTask.execute();
 
         setupToolbar();
         setupRecyclerView();
@@ -61,10 +72,26 @@ public class ProblemsFeedActivity extends AppCompatActivity implements
     }
 
     private void setupRecyclerView() {
+        Log.d("Tchep's", "ProblemsFeedActivity >>> start");
         rvProblemsFeed.setLayoutManager(new LinearLayoutManager(this));
         ProblemsFeedAdapter adapter = new ProblemsFeedAdapter(this, Problem.PROBLEMS);
         adapter.setOnProblemsFeedClickListener(this);
         rvProblemsFeed.setAdapter(adapter);
+        Log.d("Tchep's", "ProblemsFeedActivity >>> end");
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        TsApplication.getTsEventBus().register(this);
+    }
+
+    @Override
+    protected void onDestroy() {
+        TsApplication.getTsEventBus().unregister(this);
+
+        super.onDestroy();
     }
 
     @Override
@@ -87,6 +114,14 @@ public class ProblemsFeedActivity extends AppCompatActivity implements
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Subscribe
+    public void onProblemsResponse(ArrayList<Problem> pbs) {
+        this.problems = pbs;
+
+        ProblemsFeedAdapter adapter = (ProblemsFeedAdapter)this.rvProblemsFeed.getAdapter();
+        adapter.updateDate(pbs);
     }
 
     @OnClick(R.id.problems_feed_pose_problem)

@@ -1,5 +1,7 @@
 package com.tcheps.activities;
 
+import android.accounts.AccountManager;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -13,13 +15,14 @@ import android.widget.LinearLayout;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
 
+import com.squareup.otto.Subscribe;
+import com.tcheps.TsApplication;
 import com.tcheps.models.Student;
 import com.tcheps.models.Teacher;
 import com.tcheps.models.User;
 import com.tcheps.restful.TsServiceGenerator;
-import com.tcheps.restful.error.TsRetrofitError;
-import com.tcheps.restful.services.UserAuthentication;
-import com.tcheps.restful.models.SignResponse;
+import com.tcheps.restful.api.UserAuthenticationAPI;
+import com.tcheps.restful.tasks.SignUpTask;
 import com.wdullaer.materialdatetimepicker.date.DatePickerDialog;
 
 import java.text.ParseException;
@@ -29,11 +32,13 @@ import java.util.Calendar;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import retrofit.Callback;
+/*import retrofit.Callback;
 import retrofit.RetrofitError;
-import retrofit.client.Response;
+import retrofit.client.Response;*/
 
 public class SignUpActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener {
+
+    public final static String TAG = "SignUpActivity";
 
     public final static String ARG_TYPE_USER =
             "com.tcheps.activities.SignUpActivity.arg_type_user";
@@ -87,14 +92,9 @@ public class SignUpActivity extends AppCompatActivity implements DatePickerDialo
 
         Bundle bundle = getIntent().getExtras();
         if (bundle.getString(ARG_TYPE_USER).equals("student")) {
-            // UserProfileFollowersFragment studentFragment = UserProfileFollowersFragment.newInstance("", "");
-
-            // teacherGroup.setVisibility(View.INVISIBLE);teacherGroup.removeAllViews();
             teacherGroup.setVisibility(View.GONE);
             studentGroup.setVisibility(View.VISIBLE);
         } else if (bundle.getString(ARG_TYPE_USER).equals("teacher")) {
-            // UserProfilePostsFragment teacherFragment = UserProfilePostsFragment.newInstance("", "");
-
             studentGroup.setVisibility(View.GONE);
             teacherGroup.setVisibility(View.VISIBLE);
         }
@@ -127,6 +127,27 @@ public class SignUpActivity extends AppCompatActivity implements DatePickerDialo
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        TsApplication.getTsEventBus().register(this);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+
+        // TsApplication.getTsEventBus().unregister(this);
+    }
+
+    @Override
+    protected void onDestroy() {
+        TsApplication.getTsEventBus().unregister(this);
+
+        super.onDestroy();
     }
 
     @Override
@@ -167,21 +188,6 @@ public class SignUpActivity extends AppCompatActivity implements DatePickerDialo
             user.setPassword(suPassword.getText().toString());
         }
 
-        UserAuthentication userAuthentication = TsServiceGenerator.create(UserAuthentication.class);
-        // User tsUser = userAuthentication.signUp(user);
-        /*userAuthentication.signUp(user, new Callback<User>() {
-            @Override
-            public void success(User user, Response response) {
-
-            }
-
-            @Override
-            public void failure(RetrofitError error) {
-
-            }
-        });
-        */
-
         String gender = "unknown";
         if (suGender.getCheckedRadioButtonId() != -1) {
             int id = suGender.getCheckedRadioButtonId();
@@ -197,6 +203,9 @@ public class SignUpActivity extends AppCompatActivity implements DatePickerDialo
                     break;
             }
         }
+
+
+        SignUpTask signUpTask = new SignUpTask();
 
         if (_type.equals("student")) {
             Student student = new Student();
@@ -217,20 +226,8 @@ public class SignUpActivity extends AppCompatActivity implements DatePickerDialo
             student.setLevel(suStudentLevel.getText().toString());
             student.setSchool(suStudentSchool.getText().toString());
 
-            // User createdUser = userAuthentication.signUp(student);
-            userAuthentication.signUp(student, new Callback<SignResponse>() {
-                @Override
-                public void success(SignResponse signResponse, Response response) {
-                    Log.d("Tchep's", signResponse.getToken());
-                    Log.d("Tchep's", response.getUrl() + " -- " + response.getStatus());
-                }
 
-                @Override
-                public void failure(RetrofitError error) {
-                    TsRetrofitError body = (TsRetrofitError)error.getBodyAs(TsRetrofitError.class);
-                    Log.e("Tchep's", error.getMessage());
-                }
-            });
+            signUpTask.execute(student);
         } else if (bundle.getString(ARG_TYPE_USER).equals("teacher")) {
             Teacher teacher = new Teacher();
 
@@ -252,22 +249,31 @@ public class SignUpActivity extends AppCompatActivity implements DatePickerDialo
             teacher.setPlaceName(suTeacherPlaceName.getText().toString());
             teacher.setSubject(suTeacherSubjects.getSelectedItem().toString());
 
-            // User createdUser = userAuthentication.signUp(teacher);
-            /*userAuthentication.signUp(teacher, new Callback<Teacher>() {
-                @Override
-                public void success(Teacher teacher, Response response) {
-                    Log.d("Tchep's", teacher.toString());
-                    Log.d("Tchep's", response.getReason());
-                    Log.d("Tchep's", response.getUrl() + " -- " + response.getStatus());
-                }
 
-                @Override
-                public void failure(RetrofitError error) {
-                    Log.e("Tchep's", error.getMessage().toString());
-                }
-            });*/
+            signUpTask.execute(teacher);
         }
 
+    }
 
+    @Subscribe
+    public void onSignUpResponse(Intent result) {
+        if (result.hasExtra(AccountManager.KEY_ERROR_MESSAGE)) {
+            Log.e(TAG, "Error >>> " + result.getStringExtra(AccountManager.KEY_ERROR_MESSAGE));
+
+            return;
+        }
+        Log.d(TAG, "OnSignUpResponse >>> " +
+                result.getBooleanExtra(SignInActivity.ARG_IS_ADDING_NEW_ACCOUNT, false) +  " >>> " +
+                result.getStringExtra(AccountManager.KEY_AUTHTOKEN));
+
+        setResult(RESULT_OK, result);
+        finish();
+    }
+
+    @Override
+    public void onBackPressed() {
+        setResult(RESULT_CANCELED);
+
+        super.onBackPressed();
     }
 }

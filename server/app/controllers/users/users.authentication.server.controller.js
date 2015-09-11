@@ -26,8 +26,12 @@ exports.signup = function(req, res) {
 	// Init Variables
 	var user = new User(req.body);
 	if (req.body._type == 'student') {
+		req.body._type = undefined;
+
 		user = new Student(req.body);
 	} else if (req.body._type == 'teacher') {
+		req.body._type = undefined;
+
 		user = new Teacher(req.body);
 	} else {
 		console.log(user);
@@ -82,13 +86,15 @@ exports.signup = function(req, res) {
  */
 exports.signin = function(req, res, next) {
 	passport.authenticate('local', function(err, user, info) {
+		console.log('signin ... authenticate ... after local');
 		if (err || !user) {
+			console.log('signin ... authenticate ... after local ... error ... ' + info);
 			res.status(400).send(info);
 		} else {
 			// Remove sensitive data before login
 			user.password = undefined;
 			user.salt = undefined;
-
+			console.log('signin ... authenticate ... after removing sensitive data before login')
 			token.createToken(user, function(res, err, token) {
 				if (err) {
 					logger.error(err);

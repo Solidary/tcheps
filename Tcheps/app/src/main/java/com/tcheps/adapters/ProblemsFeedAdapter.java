@@ -16,9 +16,11 @@ import com.amulyakhare.textdrawable.util.ColorGenerator;
 import com.tcheps.activities.R;
 import com.tcheps.activities.UserProfileActivity;
 import com.tcheps.models.Problem;
+import com.tcheps.models.User;
 import com.tcheps.utils.Utils;
 
 import java.util.List;
+import java.util.Random;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -52,8 +54,11 @@ public class ProblemsFeedAdapter extends RecyclerView.Adapter<ProblemsFeedAdapte
     @Override
     public void onBindViewHolder(ProblemsFeedAdapter.ViewHolder holder, int position) {
         Problem problem = mProblems.get(position);
-        problem.setDescription(mContext.getString(R.string.lorem_ipsum));
+        // problem.setDescription(mContext.getString(R.string.lorem_ipsum));
 
+        Random random = new Random();
+        int posUser = 0 + random.nextInt(User.USERS.size() - 1 - 0 + 1);
+        problem.setAuthor(User.USERS.get(posUser));
 
         int rc = ColorGenerator.MATERIAL.getRandomColor();
         holder.authorAvatar.setImageDrawable(
@@ -81,6 +86,11 @@ public class ProblemsFeedAdapter extends RecyclerView.Adapter<ProblemsFeedAdapte
     @Override
     public int getItemCount() {
         return mProblems.size();
+    }
+
+    public void updateDate(List<Problem> problems) {
+        mProblems = problems;
+        notifyDataSetChanged();
     }
 
     public void setOnProblemsFeedClickListener(OnProblemsFeedClickListener onProblemsFeedClickListener) {

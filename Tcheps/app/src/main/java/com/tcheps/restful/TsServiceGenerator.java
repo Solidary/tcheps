@@ -27,6 +27,12 @@ public class TsServiceGenerator {
                 .build();
 
         return restAdapter.create(serviceClass);
-        // return TsRetrofit.TS_RETROFIT.create(serviceClass);
+        /*Retrofit r = new Retrofit.Builder()
+                .baseUrl(TsRetrofit.TS_BASE_API_URL)
+                .addConverterFactory(GsonConverterFactory.create(gson))
+                .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
+                .build();
+
+        return r.create(serviceClass);*/
     }
 }

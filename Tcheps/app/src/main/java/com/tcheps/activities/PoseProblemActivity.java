@@ -1,8 +1,5 @@
 package com.tcheps.activities;
 
-import android.support.design.widget.CoordinatorLayout;
-import android.support.design.widget.Snackbar;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -10,12 +7,12 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.MultiAutoCompleteTextView;
+import android.widget.EditText;
 import android.widget.Spinner;
 
-import com.android.ex.chips.BaseRecipientAdapter;
-import com.android.ex.chips.RecipientEditTextView;
-import com.android.ex.chips.recipientchip.DrawableRecipientChip;
+import com.tcheps.models.Problem;
+import com.tcheps.restful.TsServiceGenerator;
+import com.tcheps.restful.api.ProblemsAPI;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -29,10 +26,12 @@ public class PoseProblemActivity extends AppCompatActivity {
 
     @Bind(R.id.pose_problem_subject_sp)
     Spinner ppSubject;
-    @Bind(R.id.pose_problem_tags)
+    @Bind(R.id.pose_problem_description)
+    EditText ppDescription;
+    /*@Bind(R.id.pose_problem_tags)
     RecipientEditTextView ppTags;
     @Bind(R.id.pose_problem_circles)
-    RecipientEditTextView ppCircles;
+    RecipientEditTextView ppCircles;*/
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,9 +44,9 @@ public class PoseProblemActivity extends AppCompatActivity {
         ppSubject.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                ppTags.submitItem(ppSubject.getSelectedItem().toString(), " ");
+                /*ppTags.submitItem(ppSubject.getSelectedItem().toString(), " ");
                 DrawableRecipientChip[] tagsChips = ppTags.getSortedRecipients();
-                ppTags.removeMoreChip();
+                ppTags.removeMoreChip();*/
                 /*Snackbar
                         .make(ppCoordinatorLayout,
                         tagsChips[0].getOriginalText(), Snackbar.LENGTH_LONG)
@@ -70,12 +69,12 @@ public class PoseProblemActivity extends AppCompatActivity {
     }
 
     private void setupRecipientEdit() {
-        ppTags.setTokenizer(new MultiAutoCompleteTextView.CommaTokenizer());
+        /*ppTags.setTokenizer(new MultiAutoCompleteTextView.CommaTokenizer());
         ppTags.setAdapter(new BaseRecipientAdapter(BaseRecipientAdapter.QUERY_TYPE_PHONE, this));
 
         ppCircles.setTokenizer(new MultiAutoCompleteTextView.CommaTokenizer());
         ppCircles.setAdapter(new BaseRecipientAdapter(BaseRecipientAdapter.QUERY_TYPE_PHONE, this));
-        ppCircles.submitItem("Public", "89 004 67");
+        ppCircles.submitItem("Public", "89 004 67");*/
     }
 
     @Override
@@ -95,6 +94,24 @@ public class PoseProblemActivity extends AppCompatActivity {
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             return true;
+        }
+        if (id == R.id.action_submit) {
+            Problem pb = new Problem();
+            pb.setDescription(ppDescription.getText().toString());
+            pb.setSubject(ppSubject.getSelectedItem().toString());
+
+            ProblemsAPI ps = TsServiceGenerator.create(ProblemsAPI.class);
+            /*ps.create(pb, new Callback<Problem>() {
+                @Override
+                public void success(Problem problem, Response response) {
+                    Log.d("Tchep's", "On Success >>> " + problem.toString());
+                }
+
+                @Override
+                public void failure(RetrofitError error) {
+                    Log.d("Tchep's", "On Failure >>> " + error.getMessage());
+                }
+            });*/
         }
 
         return super.onOptionsItemSelected(item);

@@ -1,9 +1,7 @@
-package com.tcheps.restful.models;
+package com.tcheps.restful.responses;
 
 import com.google.gson.annotations.SerializedName;
 import com.tcheps.models.User;
-
-import org.parceler.Parcel;
 
 /**
  * Created by mael-fosso on 9/8/15.

@@ -12,7 +12,7 @@ public class Student extends User {
     @SerializedName("school")
     private String school;
     @SerializedName("_type")
-    private String _type = "student";
+    private String type = "student";
 
     public Student() {
     }

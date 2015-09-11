@@ -12,12 +12,8 @@ import android.text.TextUtils;
 
 import com.tcheps.activities.SignInActivity;
 import com.tcheps.restful.TsServiceGenerator;
-import com.tcheps.restful.models.SignResponse;
-import com.tcheps.restful.services.UserAuthentication;
-
-import retrofit.Callback;
-import retrofit.RetrofitError;
-import retrofit.client.Response;
+import com.tcheps.restful.responses.SignResponse;
+import com.tcheps.restful.api.UserAuthenticationAPI;
 
 /**
  * Created by mael-fosso on 9/9/15.
@@ -68,7 +64,7 @@ public class TsAuthenticator extends AbstractAccountAuthenticator {
                                final Account account,
                                String authTokenType, Bundle options) throws NetworkErrorException {
 
-        UserAuthentication userAuthentication = TsServiceGenerator.create(UserAuthentication.class);
+        UserAuthenticationAPI userAuthenticationAPI = TsServiceGenerator.create(UserAuthenticationAPI.class);
         // We can add rejection of a request for a token type we
         // don't support here
 
@@ -84,7 +80,7 @@ public class TsAuthenticator extends AbstractAccountAuthenticator {
         if (TextUtils.isEmpty(authToken)) {
             final String password = am.getPassword(account);
             if (password != null) {
-                userAuthentication.signIn(account.name, password, new Callback<SignResponse>() {
+                /*userAuthenticationAPI.signIn(account.name, password, new Callback<SignResponse>() {
                     @Override
                     public void success(SignResponse signResponse, Response response) {
                         // authToken = signResponse.getToken();
@@ -96,7 +92,7 @@ public class TsAuthenticator extends AbstractAccountAuthenticator {
                     public void failure(RetrofitError error) {
 
                     }
-                });
+                });*/
             }
         }
 

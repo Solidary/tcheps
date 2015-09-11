@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.NestedScrollView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -39,8 +40,8 @@ public class UsersFragment extends Fragment  implements
 
     private OnFragmentInteractionListener mListener;
 
-    @Bind(R.id.users_coordinator_layout)
-    CoordinatorLayout coordinatorLayout;
+    /*@Bind(R.id.users_coordinator_layout)
+    NestedScrollView coordinatorLayout;*/
     @Bind(R.id.users_rv)
     RecyclerView rvUsers;
 
@@ -136,10 +137,10 @@ public class UsersFragment extends Fragment  implements
 
     @Override
     public void onFollowClick(View v, String tag) {
-        Snackbar.make(
+        /*Snackbar.make(
                 coordinatorLayout,
                 "Follow ...",
                 Snackbar.LENGTH_LONG
-        ).show();
+        ).show();*/
     }
 }
