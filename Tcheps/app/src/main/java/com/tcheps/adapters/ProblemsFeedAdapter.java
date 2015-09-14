@@ -144,5 +144,7 @@ public class ProblemsFeedAdapter extends RecyclerView.Adapter<ProblemsFeedAdapte
         public void onProfileClick(View v, String tag);
         public void onUsersFromDescriptionClick(View v, String tag);
         public void onCommentClick(View v, String tag);
+        public void onLikeClick(View v, String tag);
+        public void onFollowClick(View v, String tag);
     }
 }

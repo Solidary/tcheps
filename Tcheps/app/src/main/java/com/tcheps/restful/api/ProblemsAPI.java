@@ -1,6 +1,7 @@
 package com.tcheps.restful.api;
 
 import com.tcheps.models.Problem;
+import com.tcheps.models.User;
 
 import java.util.List;
 
@@ -24,4 +25,9 @@ public interface ProblemsAPI {
     @GET("/problems")
     List<Problem> list();
 
+    @POST("/problems/{id}/likes")
+    void like(@Path("id") String id, Callback<Boolean> cb);
+
+    @GET("/problems/{id}/likes")
+    List<User> likers(@Path("id") String id);
 }

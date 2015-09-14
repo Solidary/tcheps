@@ -13,8 +13,10 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.squareup.otto.Subscribe;
+import com.tcheps.AuthPreferences;
 import com.tcheps.TsApplication;
 import com.tcheps.authenticator.TsAccountGeneral;
+import com.tcheps.models.User;
 import com.tcheps.restful.TsServiceGenerator;
 import com.tcheps.restful.api.UserAuthenticationAPI;
 import com.tcheps.restful.tasks.SignInTask;
@@ -40,6 +42,8 @@ public class SignInActivity extends AccountAuthenticatorActivity {
             =  "com.tcheps.activities.SignInActivity.arg_user_password";
     public final static String ARG_FROM_AUTHENTICATOR
             =  "com.tcheps.activities.SignInActivity.arg_from_authenticator";
+    public final static String ARG_USER_DATA
+            = "com.tcheps.activities.SignInActivity.arg_user_data";
 
     public final static int REQUEST_SIGN_UP = 1;
 
@@ -108,6 +112,7 @@ public class SignInActivity extends AccountAuthenticatorActivity {
                     data.getStringExtra(AccountManager.KEY_AUTHTOKEN));
             data.putExtra(AccountManager.KEY_ACCOUNT_TYPE, tsAccountType);
             finishSignIn(data);
+            finish();
         } else {
             super.onActivityResult(requestCode, resultCode, data);
         }
@@ -173,12 +178,6 @@ public class SignInActivity extends AccountAuthenticatorActivity {
 
         SignInTask signInTask = new SignInTask();
         signInTask.execute(email, password);
-
-        /*
-        final Intent res = new Intent();
-        Intent problemFeedIntent = new Intent(this, ProblemsFeedActivity.class);
-        startActivity(problemFeedIntent);
-        */
     }
 
     @Subscribe
@@ -186,32 +185,49 @@ public class SignInActivity extends AccountAuthenticatorActivity {
         if (result.hasExtra(AccountManager.KEY_ERROR_MESSAGE)) {
             Log.e(TAG, "Error >>> " + result.getStringExtra(AccountManager.KEY_ERROR_MESSAGE));
 
+            // Notify the user about the error
+
             return;
         }
         Log.d(TAG, "OnSignInResponse >>> " + result.getStringExtra(AccountManager.KEY_AUTHTOKEN));
         result.putExtra(AccountManager.KEY_ACCOUNT_TYPE, tsAccountType);
         finishSignIn(result);
+        finish();
     }
 
     private void finishSignIn(Intent intent) {
         String accountPassword = intent.getStringExtra(ARG_USER_PASSWORD);
         String accountName = intent.getStringExtra(AccountManager.KEY_ACCOUNT_NAME);
+        User user = intent.getParcelableExtra(ARG_USER_DATA);
         final Account account = new Account(
                 accountName,
                 intent.getStringExtra(AccountManager.KEY_ACCOUNT_TYPE));
         String authToken = intent.getStringExtra(AccountManager.KEY_AUTHTOKEN);
+
+        Bundle bundle = new Bundle();
+        bundle.putParcelable(ARG_USER_DATA, user);
         Log.d(TAG, "finishSignIn >>> " + authToken + " >>>> " + account.type);
-        if (intent.getBooleanExtra(ARG_IS_ADDING_NEW_ACCOUNT, false)) {
+        if (getIntent().getBooleanExtra(ARG_IS_ADDING_NEW_ACCOUNT, false)) {
             // Creating the account
             // Password is optionnal to this call, safer not to send it really
+            Log.d(TAG, "finishLogin >>> Add Account Explicitly");
+            // tsAccountManager.addAccountExplicitly(account, accountPassword, bundle);
             tsAccountManager.addAccountExplicitly(account, accountPassword, null);
+
+            // Set the auth token we got
+            // No setting the auth token will cause another call to the server to authenticate the user
+            tsAccountManager.setAuthToken(account, tsAuthTokenType, authToken);
+
         } else {
+            Log.d(TAG, "finishLogin >>> Just set the password");
             tsAccountManager.setPassword(account, accountPassword);
         }
 
-        // Set the auth token we got
-        // No setting the auth token will cause another call to the server to authenticate the user
-        tsAccountManager.setAuthToken(account, tsAuthTokenType, authToken);
+
+        AuthPreferences authPreferences = new AuthPreferences(this);
+        authPreferences.setToken(authToken);
+        authPreferences.setUser(user);
+        Log.d(TAG, "AuthPreferences >>> " + user + " >>> " + authToken);
 
         // Our base class can do what Android requires with the
         // KEY_ACCOUNT_AUTHENTICATOR_RESPONSE extra that onCreate has
@@ -219,13 +235,13 @@ public class SignInActivity extends AccountAuthenticatorActivity {
         setAccountAuthenticatorResult(intent.getExtras());
         // Tell the account manager settings page that all went well
         setResult(RESULT_OK, intent);
+        Log.d(TAG, "Set Account Authenticator Result >>> Result OK");
 
-
-        if (!getIntent().getBooleanExtra(ARG_FROM_AUTHENTICATOR, false)) {
+        /* if (!getIntent().getBooleanExtra(ARG_FROM_AUTHENTICATOR, false)) {
 
             Intent problemFeedIntent = new Intent(this, ProblemsFeedActivity.class);
             startActivity(problemFeedIntent);
-        }
-        finish();
+        } */
+        // finish();
     }
 }

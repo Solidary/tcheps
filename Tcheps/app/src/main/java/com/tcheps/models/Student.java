@@ -1,5 +1,7 @@
 package com.tcheps.models;
 
+import android.os.Parcel;
+
 import com.google.gson.annotations.SerializedName;
 
 /**
@@ -15,6 +17,11 @@ public class Student extends User {
     private String type = "student";
 
     public Student() {
+        super();
+    }
+
+    private Student(Parcel parcel) {
+        super(parcel);
     }
 
     public String getLevel() {
@@ -41,4 +48,6 @@ public class Student extends User {
     public String getType() {
         return "student";
     }
+
+
 }

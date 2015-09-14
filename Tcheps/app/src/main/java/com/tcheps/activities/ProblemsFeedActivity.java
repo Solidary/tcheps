@@ -2,7 +2,9 @@ package com.tcheps.activities;
 
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -16,12 +18,12 @@ import android.view.View;
 import com.amulyakhare.textdrawable.TextDrawable;
 import com.amulyakhare.textdrawable.util.ColorGenerator;
 import com.squareup.otto.Subscribe;
+import com.tcheps.AuthActivity;
+import com.tcheps.AuthPreferences;
 import com.tcheps.TsApplication;
 import com.tcheps.adapters.ProblemsFeedAdapter;
 import com.tcheps.models.Problem;
 import com.tcheps.models.User;
-import com.tcheps.restful.TsServiceGenerator;
-import com.tcheps.restful.api.ProblemsAPI;
 import com.tcheps.restful.tasks.ProblemsListTask;
 
 import java.util.ArrayList;
@@ -60,7 +62,14 @@ public class ProblemsFeedActivity extends AppCompatActivity implements
     }
 
     private void setupToolbar() {
-        toolbar.setTitle(User.USERS.get(0).getDisplayName());
+        AuthPreferences authPreferences = new AuthPreferences(this);
+
+                // getSharedPreferences(TsAccountGeneral.AUTHTOKEN_TYPE_FULL_ACCESS, 0);
+        String authToken = authPreferences.getToken();
+        User user = authPreferences.getUser();
+
+        // toolbar.setTitle(User.USERS.get(0).getDisplayName());
+        toolbar.setTitle(user.getDisplayName() + " -- " + authToken);
         toolbar.setSubtitle(User.USERS.get(0).getDescription());
         toolbar.setLogo(TextDrawable.builder()
                 .buildRound(User.USERS.get(0).getInitials(), ColorGenerator.MATERIAL.getRandomColor()));
@@ -158,5 +167,15 @@ public class ProblemsFeedActivity extends AppCompatActivity implements
         Intent commentProblemIntent = new Intent(this, CommentProblemActivity.class);
         commentProblemIntent.putExtras(bundle);
         startActivity(commentProblemIntent);
+    }
+
+    @Override
+    public void onLikeClick(View v, String tag) {
+
+    }
+
+    @Override
+    public void onFollowClick(View v, String tag) {
+
     }
 }

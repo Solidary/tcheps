@@ -16,6 +16,10 @@ module.exports = function(app) {
 		.get(problems.read)
 		.put(problems.update);
 
+	app.route('/problems/:problemId/likes')
+		.get(problems.likers)
+		.post(problems.like);
+
 	// Finish by binding problem middleware
 	app.param('problemId', problems.problemByID);
 };

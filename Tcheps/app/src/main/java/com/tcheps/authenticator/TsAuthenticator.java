@@ -9,16 +9,22 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 
+import com.squareup.otto.Subscribe;
 import com.tcheps.activities.SignInActivity;
+import com.tcheps.models.User;
 import com.tcheps.restful.TsServiceGenerator;
+import com.tcheps.restful.adapters.UserAuthenticationRestAdapter;
 import com.tcheps.restful.responses.SignResponse;
 import com.tcheps.restful.api.UserAuthenticationAPI;
+import com.tcheps.restful.tasks.SignInTask;
 
 /**
  * Created by mael-fosso on 9/9/15.
  */
 public class TsAuthenticator extends AbstractAccountAuthenticator {
+    public final static String TAG = "TsAuthenticator";
 
     protected Context mContext;
 
@@ -50,7 +56,7 @@ public class TsAuthenticator extends AbstractAccountAuthenticator {
         intent.putExtra(SignInActivity.ARG_FROM_AUTHENTICATOR, true);
 
         // It will also need to know how to send its response to the account manager;
-        // SignInActivity muste derive from AccountAuthenticatorActivity, which want this key set
+        // SignInActivity must derive from AccountAuthenticatorActivity, which want this key set
         intent.putExtra(AccountManager.KEY_ACCOUNT_AUTHENTICATOR_RESPONSE, accountAuthenticatorResponse);
 
         // Wrap up this intent, and return it, which will cause the intent to be run
@@ -63,36 +69,37 @@ public class TsAuthenticator extends AbstractAccountAuthenticator {
     public Bundle getAuthToken(AccountAuthenticatorResponse accountAuthenticatorResponse,
                                final Account account,
                                String authTokenType, Bundle options) throws NetworkErrorException {
-
+        Log.d(TAG, "GetAuthToken >>> start");
         UserAuthenticationAPI userAuthenticationAPI = TsServiceGenerator.create(UserAuthenticationAPI.class);
         // We can add rejection of a request for a token type we
         // don't support here
-
+        Log.d(TAG, "GetAuthToken >>> UserAuthenticationAPI");
         // Get the instance of the AccountManager that's making the
         // request
         final AccountManager am = AccountManager.get(mContext);
+        User user = null;
 
         // See if there is already an authentication token stored
         String authToken = am.peekAuthToken(account, authTokenType);
-
+        Log.d(TAG, "GetAuthToken >>> After PeekAuthToken >>> " + authToken);
         // If we have no token, use the account credentials to fetch a new one, effectively
         // another logon
         if (TextUtils.isEmpty(authToken)) {
+            Log.d(TAG, "TextUtils is Empty >>> Before getting password");
             final String password = am.getPassword(account);
+            Log.d(TAG, "TextUtils is Empty >>> The Password >>> " + password);
             if (password != null) {
-                /*userAuthenticationAPI.signIn(account.name, password, new Callback<SignResponse>() {
-                    @Override
-                    public void success(SignResponse signResponse, Response response) {
-                        // authToken = signResponse.getToken();
+                SignInTask signInTask = new SignInTask();
+                // signInTask.execute(account.name, password);
 
-                        successSignInHandBackToken(signResponse, account);
-                    }
+                UserAuthenticationRestAdapter userAuthenticationRestAdapter
+                        = new UserAuthenticationRestAdapter();
+                SignResponse signResponse =
+                        userAuthenticationRestAdapter.signIn(account.name, password);
+                authToken = signResponse.getToken();
+                user = signResponse.getUser();
 
-                    @Override
-                    public void failure(RetrofitError error) {
-
-                    }
-                });*/
+                Log.d(TAG, "After UserAuthentication SignIn >>> User >>>  " + signResponse.getUser().toString());
             }
         }
 
@@ -103,6 +110,9 @@ public class TsAuthenticator extends AbstractAccountAuthenticator {
             result.putString(AccountManager.KEY_ACCOUNT_NAME, account.name);
             result.putString(AccountManager.KEY_ACCOUNT_TYPE, account.type);
             result.putString(AccountManager.KEY_AUTHTOKEN, authToken);
+
+            result.putParcelable(SignInActivity.ARG_USER_DATA, user);
+            Log.d(TAG, "GetAuthToken >>> Auth token not empty >>> Return >>> " + authToken);
             return result;
         }
 
@@ -178,4 +188,5 @@ public class TsAuthenticator extends AbstractAccountAuthenticator {
     public Bundle updateCredentials(AccountAuthenticatorResponse accountAuthenticatorResponse, Account account, String s, Bundle bundle) throws NetworkErrorException {
         return null;
     }
+
 }

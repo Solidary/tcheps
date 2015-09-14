@@ -6,6 +6,7 @@ import android.os.AsyncTask;
 
 import com.tcheps.TsApplication;
 import com.tcheps.activities.SignInActivity;
+import com.tcheps.authenticator.TsAccountGeneral;
 import com.tcheps.restful.adapters.UserAuthenticationRestAdapter;
 import com.tcheps.restful.api.UserAuthenticationAPI;
 import com.tcheps.restful.responses.SignResponse;
@@ -30,8 +31,10 @@ public class SignInTask extends AsyncTask<String, Void, Intent> {
 
             result.putExtra(AccountManager.KEY_AUTHTOKEN, signResponse.getToken());
             result.putExtra(AccountManager.KEY_ACCOUNT_NAME, signResponse.getUser().getEmail());
+            result.putExtra(AccountManager.KEY_ACCOUNT_TYPE, TsAccountGeneral.ACCOUNT_TYPE);
 
             result.putExtra(SignInActivity.ARG_USER_PASSWORD, password);
+            result.putExtra(SignInActivity.ARG_USER_DATA, signResponse.getUser());
         } catch (Exception ex) {
             result.putExtra(AccountManager.KEY_ERROR_MESSAGE, ex.getMessage());
         }
@@ -46,6 +49,7 @@ public class SignInTask extends AsyncTask<String, Void, Intent> {
 
     @Override
     protected void onPostExecute(Intent intent) {
+
         TsApplication.getTsEventBus().post(intent);
     }
 }

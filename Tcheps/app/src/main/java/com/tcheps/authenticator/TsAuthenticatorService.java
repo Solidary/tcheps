@@ -15,10 +15,10 @@ public class TsAuthenticatorService extends Service {
     @Nullable
     @Override
     public IBinder onBind(Intent intent) {
-        if(intent.getAction().equals(
+        /*if(intent.getAction().equals(
                 AccountManager.ACTION_AUTHENTICATOR_INTENT)) {
             return null;
-        }
+        }*/
 
         AbstractAccountAuthenticator authenticator =
                 new TsAuthenticator(this);

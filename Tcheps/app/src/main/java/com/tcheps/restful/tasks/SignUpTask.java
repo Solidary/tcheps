@@ -32,6 +32,7 @@ public class SignUpTask extends AsyncTask<User, Void, Intent> {
 
             result.putExtra(SignInActivity.ARG_USER_PASSWORD, user.getPassword());
             result.putExtra(SignInActivity.ARG_IS_ADDING_NEW_ACCOUNT, true);
+            result.putExtra(SignInActivity.ARG_USER_DATA, signResponse.getUser());
         } catch (Exception ex) {
             result.putExtra(AccountManager.KEY_ERROR_MESSAGE, ex.getMessage());
         }

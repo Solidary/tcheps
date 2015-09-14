@@ -1,7 +1,13 @@
 package com.tcheps.models;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import com.google.gson.annotations.SerializedName;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -9,7 +15,7 @@ import java.util.List;
 /**
  * Created by mael-fosso on 9/2/15.
  */
-public class User {
+public class User implements Parcelable {
 
     public static final List<User> USERS = new ArrayList<User>() {{
        add(new User() {{
@@ -189,6 +195,67 @@ public class User {
             return String.valueOf(sp[0].charAt(0)) + String.valueOf(sp[1].charAt(0));
         } else {
             return String.valueOf(sp[0].charAt(0));
+        }
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "objectId='" + objectId + '\'' +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", birthDate=" + birthDate +
+                ", displayName='" + displayName + '\'' +
+                ", email='" + email + '\'' +
+                ", description='" + description + '\'' +
+                ", gender='" + gender + '\'' +
+                ", password='" + password + '\'' +
+                '}';
+    }
+
+    public static final Parcelable.Creator<User> CREATOR = new Parcelable.Creator<User>() {
+        public User createFromParcel(Parcel in) {
+            return new User(in);
+        }
+
+        public User[] newArray(int size) {
+            return new User[size];
+        }
+    };
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel parcel, int flags) {
+        parcel.writeString(objectId);
+        parcel.writeString(firstName);
+        parcel.writeString(lastName);
+        parcel.writeString(displayName);
+        parcel.writeString(email);
+        parcel.writeString(gender);
+        parcel.writeString(password);
+
+        DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
+        parcel.writeString(df.format(birthDate));
+    }
+
+    protected User(Parcel parcel) {
+        objectId = parcel.readString();
+        firstName = parcel.readString();
+        lastName = parcel.readString();
+        displayName = parcel.readString();
+        email = parcel.readString();
+        gender = parcel.readString();
+        password = parcel.readString();
+
+        DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
+        try {
+            birthDate = df.parse(parcel.readString());
+        } catch (ParseException pex) {
+            // birthDate = df.parse("01/01/1900");
         }
     }
 }

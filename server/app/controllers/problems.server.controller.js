@@ -87,7 +87,21 @@ exports.like = function(req, res) {
 /**
  *
  */
+exports.likers = function(req, res) {
+
+}
+
+/**
+ *
+ */
 exports.follow = function(req, res) {
+
+}
+
+/**
+ *
+ */
+exports.followers = function(req, res) {
 
 }
 
