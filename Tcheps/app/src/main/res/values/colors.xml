@@ -12,4 +12,6 @@
 
     <color name="mdtp_accent_color">@color/color_primary</color>
     <color name="mdtp_accent_color_dark">@color/color_primary_dark</color>
+
+    <color name="text_like_counter">#827717</color>
 </resources>

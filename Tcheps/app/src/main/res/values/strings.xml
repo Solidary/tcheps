@@ -48,7 +48,7 @@
     <string-array name="pose_problem_circles_entries">
         <item>Public</item>
     </string-array>
-    <string name="pose_problem_action_submit">Submit</string>
+    <string name="pose_problem_action_submit">Done</string>
     <string name="pose_problem_action_cancel">Cancel</string>
 
     <string name="comment_problem_comment_et_hint">Your comment here</string>
@@ -63,4 +63,16 @@
     <string name="authenticator_account_type">com.tcheps</string>
     <string name="authenticator_label">@string/app_name</string>
     <string name="title_activity_main">MainActivity</string>
+
+    <plurals name="likes_count">
+        <item quantity="zero">%d like</item>
+        <item quantity="one">%d like</item>
+        <item quantity="other">%d likes</item>
+    </plurals>
+
+    <plurals name="followers_count">
+        <item quantity="zero">%d follower</item>
+        <item quantity="one">%d follower</item>
+        <item quantity="other">%d followers</item>
+    </plurals>
 </resources>

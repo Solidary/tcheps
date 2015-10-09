@@ -47,7 +47,7 @@ exports.requiresLoginToken = function(req, res, next) {
 			return res.status(401).send(err.message);
 		}
 
-		req.user = data;
+		req.user = new User(data);
 		next();
 	}.bind(null, next));
 };

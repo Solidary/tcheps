@@ -249,7 +249,8 @@
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:padding="5dp">
+                        android:padding="5dp"
+                        android:gravity="center_vertical|left">
                         <ImageButton
                             android:id="@+id/problems_feed_like_btn"
                             android:layout_width="wrap_content"
@@ -257,24 +258,31 @@
                             android:background="@android:color/transparent"
                             android:src="@drawable/ic_favorite_border_color_default_24dp"/>
                         <TextSwitcher
+                            android:id="@+id/problems_feed_likes_counter"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="5dp"
                             android:layout_marginRight="10dp"
-                            android:gravity="center_vertical">
+                            android:gravity="center_vertical"
+                            android:inAnimation="@anim/slide_out_likes_counter"
+                            android:outAnimation="@anim/slide_out_likes_counter">
+                            <TextView
+                                android:id="@+id/problems_feed_likes_tv"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="123 likes"
+                                android:textColor="@color/text_like_counter"/>
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="123 likes"/>
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"/>
+                                android:textColor="@color/text_like_counter"/>
                         </TextSwitcher>
                     </LinearLayout>
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:padding="5dp">
+                        android:padding="5dp"
+                        android:gravity="center_vertical|left">
                         <ImageButton
                             android:id="@+id/problems_feed_follow_btn"
                             android:layout_width="wrap_content"
@@ -282,12 +290,16 @@
                             android:background="@android:color/transparent"
                             android:src="@drawable/ic_flash_on_color_default_24dp"/>
                         <TextSwitcher
-                            android:id="@+id/tsLikesCounter"
+                            android:id="@+id/problems_feed_follows_counter"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="5dp"
-                            android:layout_marginRight="10dp">
+                            android:layout_marginRight="10dp"
+                            android:gravity="center_vertical"
+                            android:inAnimation="@anim/slide_out_followers_counter"
+                            android:outAnimation="@anim/slide_out_followers_counter">
                             <TextView
+                                android:id="@+id/problems_feed_follows_tv"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="123 followers"

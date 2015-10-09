@@ -2,8 +2,11 @@ package com.tcheps.restful;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.squareup.okhttp.OkHttpClient;
 
+import retrofit.RequestInterceptor;
 import retrofit.RestAdapter;
+import retrofit.client.OkClient;
 import retrofit.converter.GsonConverter;
 
 /**
@@ -16,23 +19,32 @@ public class TsServiceGenerator {
     }
 
     public static <T> T create(Class<T> serviceClass) {
+
+        return create(serviceClass, null);
+    }
+
+    public static <S> S create(Class<S> serviceClass, final String token) {
         Gson gson = new GsonBuilder()
                 .setDateFormat("yyyy'-'MM'-'dd'T'HH':'mm':'ss'.'SSS'Z'")
                 .create();
 
-        RestAdapter restAdapter = new RestAdapter.Builder()
-                .setLogLevel(RestAdapter.LogLevel.FULL)
+        RestAdapter.Builder builder = new RestAdapter.Builder()
                 .setEndpoint(TsRetrofit.TS_BASE_API_URL)
-                .setConverter(new GsonConverter(gson))
-                .build();
+                .setLogLevel(RestAdapter.LogLevel.FULL)
+                .setClient(new OkClient(new OkHttpClient()))
+                .setConverter(new GsonConverter(gson));
 
-        return restAdapter.create(serviceClass);
-        /*Retrofit r = new Retrofit.Builder()
-                .baseUrl(TsRetrofit.TS_BASE_API_URL)
-                .addConverterFactory(GsonConverterFactory.create(gson))
-                .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
-                .build();
+        if (token != null) {
+            builder.setRequestInterceptor(new RequestInterceptor() {
+                @Override
+                public void intercept(RequestFacade request) {
+                    request.addHeader("Accept", "application/json");
+                    request.addHeader("Authorization", "Bearer " + token);
+                }
+            });
+        }
 
-        return r.create(serviceClass);*/
+        RestAdapter adapter = builder.build();
+        return adapter.create(serviceClass);
     }
 }

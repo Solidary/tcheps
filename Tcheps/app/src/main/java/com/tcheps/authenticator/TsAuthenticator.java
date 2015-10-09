@@ -12,6 +12,7 @@ import android.text.TextUtils;
 import android.util.Log;
 
 import com.squareup.otto.Subscribe;
+import com.tcheps.AuthPreferences;
 import com.tcheps.activities.SignInActivity;
 import com.tcheps.models.User;
 import com.tcheps.restful.TsServiceGenerator;
@@ -19,6 +20,8 @@ import com.tcheps.restful.adapters.UserAuthenticationRestAdapter;
 import com.tcheps.restful.responses.SignResponse;
 import com.tcheps.restful.api.UserAuthenticationAPI;
 import com.tcheps.restful.tasks.SignInTask;
+
+import org.apache.http.auth.AUTH;
 
 /**
  * Created by mael-fosso on 9/9/15.
@@ -113,6 +116,10 @@ public class TsAuthenticator extends AbstractAccountAuthenticator {
 
             result.putParcelable(SignInActivity.ARG_USER_DATA, user);
             Log.d(TAG, "GetAuthToken >>> Auth token not empty >>> Return >>> " + authToken);
+
+            AuthPreferences authPreferences = new AuthPreferences(this.mContext);
+            authPreferences.setToken(authToken);
+
             return result;
         }
 

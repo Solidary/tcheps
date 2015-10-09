@@ -1,6 +1,8 @@
 package com.tcheps.models;
 
 import com.google.gson.annotations.SerializedName;
+import com.tcheps.AuthPreferences;
+import com.tcheps.TsApplication;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -67,7 +69,12 @@ public class Problem {
     @SerializedName("created")
     private Date created;
 
+
     List<Comment> comments;
+    @SerializedName("likes")
+    ArrayList<Like> likes = new ArrayList<Like>();
+    @SerializedName("followers")
+    ArrayList<Follower> followers = new ArrayList<Follower>();
 
     private User author;
 
@@ -137,6 +144,32 @@ public class Problem {
 
     public void setComments(List<Comment> comments) {
         this.comments = comments;
+    }
+
+    public ArrayList<Follower> getFollowers() {
+        return followers;
+    }
+
+    public void setFollowers(ArrayList<Follower> followers) {
+        this.followers = followers;
+    }
+
+    public ArrayList<Like> getLikes() {
+        return likes;
+    }
+
+    public void setLikes(ArrayList<Like> likes) {
+        this.likes = likes;
+    }
+
+    public boolean isUserHasLiked(User user) {
+        for (Like like: likes) {
+            if (like.getAuthor().getObjectId().equals(user.getObjectId())) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     @Override

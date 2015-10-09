@@ -4,6 +4,7 @@
  * Module dependencies.
  */
 var mongoose = require('mongoose'),
+	errorHandler = require('./errors.server.controller'),
     Problem = mongoose.model('Problem'),
     _ = require('lodash');
 
@@ -12,15 +13,15 @@ var mongoose = require('mongoose'),
  */
 exports.create = function(req, res) {
     var problem = new Problem(req.body);
-    // problem.author = req.user;
+    problem.author = req.user;
 
-    problem.save(function(err) {
+    problem.save(function(err, ps) {
         if (err) {
 			return res.status(400).send({
 				message: errorHandler.getErrorMessage(err)
 			});
 		} else {
-            problem.id = problem._id;
+            problem.populate('author');
 			res.json(problem);
 		}
     });
@@ -65,13 +66,16 @@ exports.delete = function(req, res) {
 exports.list = function(req, res) {
     Problem.find()
         .sort('-created')
-        // .populate('user', 'displayName')
+        .populate('author')
+        .populate('likes.author')
+        .populate('follows.author')
         .exec(function(err, problems) {
     		if (err) {
     			return res.status(400).send({
     				message: errorHandler.getErrorMessage(err)
     			});
     		} else {
+				console.log(problems);
     			res.json(problems);
     		}
 	});
@@ -81,6 +85,34 @@ exports.list = function(req, res) {
  *
  */
 exports.like = function(req, res) {
+	var problem = req.problem;
+	var user = req.user;
+	var state = true;
+
+	for(var i = 0; i < problem.likes.length; i++) {
+		var like = problem.likes[i];
+		if (like.author.toString() === user._id.toString()) {
+			problem.likes.id(like.id).remove();
+
+			state = false;
+			break;
+		}
+	}
+
+	if (state) {
+		problem.likes.push({
+			author: user
+		});
+	}
+
+	problem.save(function(err) {
+		if (err) {
+			return res.status(400).send({
+				message: errorHandler.getErrorMessage(err)
+			});
+		}
+		res.json(state);
+	})
 
 }
 
@@ -95,7 +127,34 @@ exports.likers = function(req, res) {
  *
  */
 exports.follow = function(req, res) {
+	var problem = req.problem;
+	var user = req.user;
+	var state = true;
 
+	for(var i = 0; i < problem.followers.length; i++) {
+		var follower = problem.followers[i];
+		if (follower.author.toString() === user._id.toString()) {
+			problem.followers.id(follower.id).remove();
+
+			state = false;
+			break;
+		}
+	}
+
+	if (state) {
+		problem.followers.push({
+			author: user
+		});
+	}
+
+	problem.save(function(err) {
+		if (err) {
+			return res.status(400).send({
+				message: errorHandler.getErrorMessage(err)
+			});
+		}
+		res.json(state);
+	})
 }
 
 /**

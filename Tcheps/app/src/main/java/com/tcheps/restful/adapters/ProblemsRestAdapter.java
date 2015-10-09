@@ -4,7 +4,9 @@ import com.tcheps.models.Problem;
 import com.tcheps.restful.TsServiceGenerator;
 import com.tcheps.restful.api.ProblemsAPI;
 
-import java.util.List;
+import java.util.ArrayList;
+
+import retrofit.Callback;
 
 /**
  * Created by mael-fosso on 9/11/15.
@@ -14,11 +16,12 @@ public class ProblemsRestAdapter {
 
     ProblemsAPI problemsAPI;
 
-    public ProblemsRestAdapter() {
-        problemsAPI = TsServiceGenerator.create(ProblemsAPI.class);
+    public ProblemsRestAdapter(String token) {
+        problemsAPI = TsServiceGenerator.create(ProblemsAPI.class, token);
     }
 
-    public List<Problem> list() {
+    public ArrayList<Problem> list() {
         return problemsAPI.list();
     }
+
 }

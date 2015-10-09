@@ -34,20 +34,19 @@ public class AuthActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         // setContentView(R.layout.activity_main);
+            Intent pfIntent = new Intent(this, ProblemsFeedActivity.class);
+            //pfIntent.putExtra(SignInActivity.ARG_IS_ADDING_NEW_ACCOUNT, true);
+            startActivity(pfIntent);
 
-        Log.d(TAG, "On Create >>> Get accounts by type");
+            finish();
+        /*Log.d(TAG, "On Create >>> Get accounts by type");
         am = AccountManager.get(this);
         authPreferences = new AuthPreferences(this);
 
         Account[] accounts = am.getAccountsByType(TsAccountGeneral.ACCOUNT_TYPE);
         Log.d(TAG, "On Create >>> " + TsAccountGeneral.ACCOUNT_TYPE + " >>> " + accounts.length);
         if (accounts.length == 0) {
-            /*Intent siIntent = new Intent(this, SignInActivity.class);
-            siIntent.putExtra(SignInActivity.ARG_IS_ADDING_NEW_ACCOUNT, true);
-            startActivity(siIntent);
 
-            finish();*/
-            // return;
             Log.d(TAG, "On Create >>> No suitable account found >>> Directing user to add one");
             final AccountManagerFuture<Bundle> future = am.addAccount(
                     TsAccountGeneral.ACCOUNT_TYPE,
@@ -64,7 +63,7 @@ public class AuthActivity extends AppCompatActivity {
         Log.d(TAG, "On Create >>> Get Auth Token");
 
         account = accounts[0];
-        fetchToken();
+        fetchToken();*/
     }
 
     private void fetchToken() {

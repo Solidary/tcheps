@@ -3,6 +3,7 @@ package com.tcheps.activities;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -10,12 +11,17 @@ import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.Spinner;
 
+import com.tcheps.AuthPreferences;
 import com.tcheps.models.Problem;
+import com.tcheps.models.User;
 import com.tcheps.restful.TsServiceGenerator;
 import com.tcheps.restful.api.ProblemsAPI;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import retrofit.Callback;
+import retrofit.RetrofitError;
+import retrofit.client.Response;
 
 public class PoseProblemActivity extends AppCompatActivity {
 
@@ -62,10 +68,11 @@ public class PoseProblemActivity extends AppCompatActivity {
     }
 
     private void setupToolbar() {
-        toolbar.setTitle("Pose a problem");
+        toolbar.setTitle(null);
         setSupportActionBar(toolbar);
 
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        // getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setTitle(null);
     }
 
     private void setupRecipientEdit() {
@@ -95,23 +102,34 @@ public class PoseProblemActivity extends AppCompatActivity {
         if (id == R.id.action_settings) {
             return true;
         }
+        if (id == R.id.action_cancel) {
+            finish();
+
+            return true;
+        }
         if (id == R.id.action_submit) {
             Problem pb = new Problem();
             pb.setDescription(ppDescription.getText().toString());
             pb.setSubject(ppSubject.getSelectedItem().toString());
 
-            ProblemsAPI ps = TsServiceGenerator.create(ProblemsAPI.class);
-            /*ps.create(pb, new Callback<Problem>() {
+            AuthPreferences authPreferences = new AuthPreferences(this);
+            String authToken = authPreferences.getToken();
+            User user = authPreferences.getUser();
+
+            ProblemsAPI ps = TsServiceGenerator.create(ProblemsAPI.class, authToken);
+            ps.create(pb, new Callback<Problem>() {
                 @Override
                 public void success(Problem problem, Response response) {
                     Log.d("Tchep's", "On Success >>> " + problem.toString());
+                    finish();
                 }
 
                 @Override
                 public void failure(RetrofitError error) {
                     Log.d("Tchep's", "On Failure >>> " + error.getMessage());
+                    // Use a snackbar to display the error.
                 }
-            });*/
+            });
         }
 
         return super.onOptionsItemSelected(item);

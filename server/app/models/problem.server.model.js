@@ -23,11 +23,35 @@ var ProblemSchema = new Schema({
 		required: true
 	},
 
-
 	created: {
 		type: Date,
 		default: Date.now
-	}
+	},
+	author: {
+		type: Schema.ObjectId,
+		ref: 'User'
+	},
+
+	likes: [{
+		author: {
+			type: Schema.ObjectId,
+			ref: 'User'
+		},
+		liked: {
+			type: Date,
+			default: Date.now
+		}
+	}],
+	followers: [{
+		author: {
+			type: Schema.ObjectId,
+			ref: 'User'
+		},
+		followed: {
+			type: Date,
+			default: Date.now
+		}
+	}]
 });
 
 mongoose.model('Problem', ProblemSchema);

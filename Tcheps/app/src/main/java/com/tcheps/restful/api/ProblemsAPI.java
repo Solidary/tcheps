@@ -3,7 +3,7 @@ package com.tcheps.restful.api;
 import com.tcheps.models.Problem;
 import com.tcheps.models.User;
 
-import java.util.List;
+import java.util.ArrayList;
 
 import retrofit.Callback;
 import retrofit.http.Body;
@@ -23,11 +23,14 @@ public interface ProblemsAPI {
     void read(@Path("id") String id, Callback<Problem> cb);
 
     @GET("/problems")
-    List<Problem> list();
+    ArrayList<Problem> list();
 
     @POST("/problems/{id}/likes")
     void like(@Path("id") String id, Callback<Boolean> cb);
 
+    @POST("/problems/{id}/followers")
+    void follow(@Path("id") String id, Callback<Boolean> cb);
+
     @GET("/problems/{id}/likes")
-    List<User> likers(@Path("id") String id);
+    ArrayList<User> likers(@Path("id") String id);
 }

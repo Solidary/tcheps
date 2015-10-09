@@ -37,6 +37,9 @@ import butterknife.OnClick;
 public class ProblemsFeedActivity extends AppCompatActivity implements
         ProblemsFeedAdapter.OnProblemsFeedClickListener {
 
+    public final static String TAG = "ProblemsFeedActivity";
+    public final static int REQ_POSE_PROBLEM = 1;
+
     @Bind(R.id.toolbar)
     Toolbar toolbar;
 
@@ -47,14 +50,18 @@ public class ProblemsFeedActivity extends AppCompatActivity implements
     FloatingActionButton pfPoseProblem;
 
     List<Problem> problems = Collections.emptyList();
-
+    ProblemsListTask problemsListTask;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_problems_feed);
         ButterKnife.bind(this);
 
-        ProblemsListTask problemsListTask = new ProblemsListTask();
+        AuthPreferences authPreferences = new AuthPreferences(this);
+        String authToken = authPreferences.getToken();
+        User user = authPreferences.getUser();
+
+        problemsListTask = new ProblemsListTask(authToken);
         problemsListTask.execute();
 
         setupToolbar();
@@ -69,7 +76,7 @@ public class ProblemsFeedActivity extends AppCompatActivity implements
         User user = authPreferences.getUser();
 
         // toolbar.setTitle(User.USERS.get(0).getDisplayName());
-        toolbar.setTitle(user.getDisplayName() + " -- " + authToken);
+        toolbar.setTitle(user.getDisplayName()); // + " -- " + authToken);
         toolbar.setSubtitle(User.USERS.get(0).getDescription());
         toolbar.setLogo(TextDrawable.builder()
                 .buildRound(User.USERS.get(0).getInitials(), ColorGenerator.MATERIAL.getRandomColor()));
@@ -83,7 +90,8 @@ public class ProblemsFeedActivity extends AppCompatActivity implements
     private void setupRecyclerView() {
         Log.d("Tchep's", "ProblemsFeedActivity >>> start");
         rvProblemsFeed.setLayoutManager(new LinearLayoutManager(this));
-        ProblemsFeedAdapter adapter = new ProblemsFeedAdapter(this, Problem.PROBLEMS);
+        // ProblemsFeedAdapter adapter = new ProblemsFeedAdapter(this, Problem.PROBLEMS);
+        ProblemsFeedAdapter adapter = new ProblemsFeedAdapter(this, this.problems);
         adapter.setOnProblemsFeedClickListener(this);
         rvProblemsFeed.setAdapter(adapter);
         Log.d("Tchep's", "ProblemsFeedActivity >>> end");
@@ -92,8 +100,13 @@ public class ProblemsFeedActivity extends AppCompatActivity implements
     @Override
     protected void onResume() {
         super.onResume();
+        //problemsListTask.execute();
 
         TsApplication.getTsEventBus().register(this);
+    }
+
+    protected void onRestart() {
+        //problemsListTask.execute();
     }
 
     @Override
@@ -128,15 +141,18 @@ public class ProblemsFeedActivity extends AppCompatActivity implements
     @Subscribe
     public void onProblemsResponse(ArrayList<Problem> pbs) {
         this.problems = pbs;
-
+        Log.d(TAG, "onProblemsResponse ::: " + pbs.size());
         ProblemsFeedAdapter adapter = (ProblemsFeedAdapter)this.rvProblemsFeed.getAdapter();
-        adapter.updateDate(pbs);
+        adapter.updateData(pbs);
     }
 
     @OnClick(R.id.problems_feed_pose_problem)
     public void onPoseProblemClick() {
+        TsApplication.getTsEventBus().unregister(this);
+        problemsListTask.cancel(true);
+
         Intent poseProblemIntent = new Intent(this, PoseProblemActivity.class);
-        startActivity(poseProblemIntent);
+        startActivityForResult(poseProblemIntent, REQ_POSE_PROBLEM);
     }
 
     @Override

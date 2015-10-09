@@ -13,7 +13,7 @@ import retrofit.converter.GsonConverter;
  */
 public class TsRetrofit {
 
-    public final static String TS_BASE_API_URL = "http://192.168.56.1:3000";
+    public final static String TS_BASE_API_URL = "http://192.168.57.1:3000"; //"http://192.168.56.1:3000";
 
 
     /*public final static Retrofit TS_RETROFIT = new Retrofit.Builder()
