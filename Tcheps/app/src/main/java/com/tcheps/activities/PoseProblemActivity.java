@@ -112,11 +112,11 @@ public class PoseProblemActivity extends AppCompatActivity {
             pb.setDescription(ppDescription.getText().toString());
             pb.setSubject(ppSubject.getSelectedItem().toString());
 
-            AuthPreferences authPreferences = new AuthPreferences(this);
+            /*AuthPreferences authPreferences = new AuthPreferences(this);
             String authToken = authPreferences.getToken();
-            User user = authPreferences.getUser();
+            User user = authPreferences.getUser();*/
 
-            ProblemsAPI ps = TsServiceGenerator.create(ProblemsAPI.class, authToken);
+            /*ProblemsAPI ps = TsServiceGenerator.create(ProblemsAPI.class, authToken);
             ps.create(pb, new Callback<Problem>() {
                 @Override
                 public void success(Problem problem, Response response) {
@@ -129,7 +129,7 @@ public class PoseProblemActivity extends AppCompatActivity {
                     Log.d("Tchep's", "On Failure >>> " + error.getMessage());
                     // Use a snackbar to display the error.
                 }
-            });
+            });*/
         }
 
         return super.onOptionsItemSelected(item);

@@ -22,6 +22,7 @@ import com.tcheps.AuthActivity;
 import com.tcheps.AuthPreferences;
 import com.tcheps.TsApplication;
 import com.tcheps.adapters.ProblemsFeedAdapter;
+import com.tcheps.data.Constant;
 import com.tcheps.models.Problem;
 import com.tcheps.models.User;
 import com.tcheps.restful.tasks.ProblemsListTask;
@@ -57,26 +58,28 @@ public class ProblemsFeedActivity extends AppCompatActivity implements
         setContentView(R.layout.activity_problems_feed);
         ButterKnife.bind(this);
 
-        AuthPreferences authPreferences = new AuthPreferences(this);
+        /*AuthPreferences authPreferences = new AuthPreferences(this);
         String authToken = authPreferences.getToken();
         User user = authPreferences.getUser();
 
         problemsListTask = new ProblemsListTask(authToken);
-        problemsListTask.execute();
+        problemsListTask.execute();*/
+
+        this.problems = Constant.getProblemsData(this);
 
         setupToolbar();
         setupRecyclerView();
     }
 
     private void setupToolbar() {
-        AuthPreferences authPreferences = new AuthPreferences(this);
+        /* AuthPreferences authPreferences = new AuthPreferences(this);
 
                 // getSharedPreferences(TsAccountGeneral.AUTHTOKEN_TYPE_FULL_ACCESS, 0);
         String authToken = authPreferences.getToken();
-        User user = authPreferences.getUser();
+        User user = authPreferences.getUser(); */
 
         // toolbar.setTitle(User.USERS.get(0).getDisplayName());
-        toolbar.setTitle(user.getDisplayName()); // + " -- " + authToken);
+        /* toolbar.setTitle(user.getDisplayName()); // + " -- " + authToken);
         toolbar.setSubtitle(User.USERS.get(0).getDescription());
         toolbar.setLogo(TextDrawable.builder()
                 .buildRound(User.USERS.get(0).getInitials(), ColorGenerator.MATERIAL.getRandomColor()));
@@ -84,17 +87,15 @@ public class ProblemsFeedActivity extends AppCompatActivity implements
 
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setLogo(TextDrawable.builder()
-                .buildRound(User.USERS.get(0).getInitials(), ColorGenerator.MATERIAL.getRandomColor()));
+                .buildRound(User.USERS.get(0).getInitials(), ColorGenerator.MATERIAL.getRandomColor())); */
     }
 
     private void setupRecyclerView() {
-        Log.d("Tchep's", "ProblemsFeedActivity >>> start");
         rvProblemsFeed.setLayoutManager(new LinearLayoutManager(this));
-        // ProblemsFeedAdapter adapter = new ProblemsFeedAdapter(this, Problem.PROBLEMS);
+
         ProblemsFeedAdapter adapter = new ProblemsFeedAdapter(this, this.problems);
         adapter.setOnProblemsFeedClickListener(this);
         rvProblemsFeed.setAdapter(adapter);
-        Log.d("Tchep's", "ProblemsFeedActivity >>> end");
     }
 
     @Override
@@ -107,6 +108,7 @@ public class ProblemsFeedActivity extends AppCompatActivity implements
 
     protected void onRestart() {
         //problemsListTask.execute();
+        super.onRestart();
     }
 
     @Override

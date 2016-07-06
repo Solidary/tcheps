@@ -1,4 +1,4 @@
-package com.tcheps.activities;
+package com.tcheps;
 
 import android.app.Application;
 import android.test.ApplicationTestCase;

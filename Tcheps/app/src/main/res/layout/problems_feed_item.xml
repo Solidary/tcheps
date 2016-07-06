@@ -34,13 +34,15 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:clickable="true"
-                        android:textStyle="bold" android:textSize="20sp"/>
+                        android:textStyle="bold" android:textSize="20sp"
+                        android:text="Name"/>
                     <TextView
                         android:id="@+id/problems_feed_author_description"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:clickable="true"
-                        android:textStyle="italic" android:textSize="15sp"/>
+                        android:textStyle="italic" android:textSize="15sp"
+                        android:text="1ere D"/>
                 </LinearLayout>
                 <!--LinearLayout
                     android:id="@+id/problems_feed_stats_ll"
@@ -130,7 +132,6 @@
                     android:layout_width="match_parent" android:layout_height="wrap_content"
                     android:textSize="17sp"
                     android:padding="5dp"
-                    android:layout_alignParentBottom="true"
                     android:layout_below="@id/problems_feed_author_ll"/>
             </RelativeLayout>
 

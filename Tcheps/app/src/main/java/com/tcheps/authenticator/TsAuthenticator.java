@@ -21,7 +21,7 @@ import com.tcheps.restful.responses.SignResponse;
 import com.tcheps.restful.api.UserAuthenticationAPI;
 import com.tcheps.restful.tasks.SignInTask;
 
-import org.apache.http.auth.AUTH;
+// import org.apache.http.auth.AUTH;
 
 /**
  * Created by mael-fosso on 9/9/15.

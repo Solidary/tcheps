@@ -173,7 +173,7 @@ public class SignUpActivity extends AppCompatActivity implements DatePickerDialo
         Bundle bundle = getIntent().getExtras();
         _type = bundle.getString(ARG_TYPE_USER);
 
-        User user = new User();
+        /*User user = new User();
         user.setFirstName(suFirstName.getText().toString());
         user.setLastName(suLastName.getText().toString());
         user.setEmail(suEmail.getText().toString());
@@ -251,7 +251,7 @@ public class SignUpActivity extends AppCompatActivity implements DatePickerDialo
 
 
             signUpTask.execute(teacher);
-        }
+        }*/
 
     }
 

@@ -17,100 +17,31 @@ import java.util.List;
  */
 public class User implements Parcelable {
 
-    public static final List<User> USERS = new ArrayList<User>() {{
-       add(new User() {{
-           setObjectId("45se12");
-           setFirstName("Mael");
-           setLastName("FOSSO");
-           setEmail("fosso.mael.elvis@gmail.com");
-           setDescription("PD4, Lycee Classique et Moderne de Maroua");
-           // setType("student");
-       }}) ;
-        add(new User() {{
-            setObjectId("445812");
-            setFirstName("Emery");
-            setLastName("TCHEPIN");
-            setEmail("emery.tchepin@gmail.com");
-            setDescription("TleC, College MAZENOTH de NGaoundere");
-            // setType("student");
-        }}) ;
-        add(new User() {{
-            setObjectId("gh778h");
-            setFirstName("Charles");
-            setLastName("TETKA");
-            setEmail("charles.tetka@gmail.com");
-            setDescription("TleD, Lycee LeClerc de Yaounde");
-            // setType("student");
-        }}) ;
-        add(new User() {{
-            setObjectId("78lls1d");
-            setFirstName("Ariel");
-            setLastName("BOUNOU");
-            setEmail("ariel.bounou@gmail.com");
-            setDescription("TleD, College Fleming de Yaounde");
-            // setType("student");
-        }}) ;
-        add(new User() {{
-            setObjectId("45se12");
-            setFirstName("Mael");
-            setLastName("FOSSO");
-            setEmail("fosso.mael.elvis@gmail.com");
-            setDescription("PD4, Lycee Classique et Moderne de Maroua");
-            // setType("student");
-        }}) ;
-        add(new User() {{
-            setObjectId("445812");
-            setFirstName("Emery");
-            setLastName("TCHEPIN");
-            setEmail("emery.tchepin@gmail.com");
-            setDescription("TleC, College MAZENOTH de NGaoundere");
-            // setType("student");
-        }}) ;
-        add(new User() {{
-            setObjectId("gh778h");
-            setFirstName("Charles");
-            setLastName("TETKA");
-            setEmail("charles.tetka@gmail.com");
-            setDescription("TleD, Lycee LeClerc de Yaounde");
-            // setType("student");
-        }}) ;
-        add(new User() {{
-            setObjectId("78lls1d");
-            setFirstName("Ariel");
-            setLastName("BOUNOU");
-            setEmail("ariel.bounou@gmail.com");
-            setDescription("TleD, College Fleming de Yaounde");
-            //setType("student");
-        }}) ;
-    }};
-
     @SerializedName("_id")
     private String objectId;
-    @SerializedName("firstName")
-    private String firstName;
-    @SerializedName("lastName")
-    private String lastName;
-    @SerializedName("birthDate")
-    private Date birthDate;
-    @SerializedName("displayName")
-    private String displayName;
+
+    @SerializedName("name")
+    private String name;
+
+    @SerializedName("photo")
+    private Date photo;
+
     @SerializedName("email")
     private String email;
-    private String description;
+
+    @SerializedName("level")
+    private String level;
+
+    @SerializedName("school")
+    private String school;
+
     @SerializedName("gender")
     private String gender;
+
     @SerializedName("password")
     private String password;
 
     public User() {
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
     }
 
     public String getObjectId() {
@@ -121,28 +52,52 @@ public class User implements Parcelable {
         this.objectId = objectId;
     }
 
-    public String getFirstName() {
-        return firstName;
+    public String getName() {
+        return name;
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getLastName() {
-        return lastName;
+    public Date getPhoto() {
+        return photo;
     }
 
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
+    public void setPhoto(Date photo) {
+        this.photo = photo;
     }
 
-    public Date getBirthDate() {
-        return birthDate;
+    public String getEmail() {
+        return email;
     }
 
-    public void setBirthDate(Date birthDate) {
-        this.birthDate = birthDate;
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getLevel() {
+        return level;
+    }
+
+    public void setLevel(String level) {
+        this.level = level;
+    }
+
+    public String getSchool() {
+        return school;
+    }
+
+    public void setSchool(String school) {
+        this.school = school;
+    }
+
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
     }
 
     public String getPassword() {
@@ -152,65 +107,32 @@ public class User implements Parcelable {
     public void setPassword(String password) {
         this.password = password;
     }
-    /*
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
-    }
-    */
-    public String getGender() {
-        return gender;
-    }
-
-    public void setGender(String gender) {
-        this.gender = gender;
-    }
-
-    public String getDisplayName() {
-        if (displayName == null) {
-            displayName = firstName.trim() + " " + lastName.trim();
-        }
-
-        return displayName;
-    }
-
-    public void setDisplayName(String displayName) {
-        this.displayName = displayName;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public String getInitials() {
-        String[] sp = getDisplayName().split(" ");
-        if (sp.length > 1) {
-            return String.valueOf(sp[0].charAt(0)) + String.valueOf(sp[1].charAt(0));
-        } else {
-            return String.valueOf(sp[0].charAt(0));
-        }
-    }
 
     @Override
     public String toString() {
         return "User{" +
                 "objectId='" + objectId + '\'' +
-                ", firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
-                ", birthDate=" + birthDate +
-                ", displayName='" + displayName + '\'' +
+                ", name='" + name + '\'' +
+                ", photo=" + photo +
                 ", email='" + email + '\'' +
-                ", description='" + description + '\'' +
+                ", level='" + level + '\'' +
+                ", school='" + school + '\'' +
                 ", gender='" + gender + '\'' +
                 ", password='" + password + '\'' +
                 '}';
+    }
+
+    public String getDescription() {
+        return level + ", " + school;
+    }
+
+    public String getInitials() {
+        String[] sp = getName().split(" ");
+        if (sp.length > 1) {
+            return String.valueOf(sp[0].charAt(0)) + String.valueOf(sp[1].charAt(0));
+        } else {
+            return String.valueOf(sp[0].charAt(0));
+        }
     }
 
     public static final Parcelable.Creator<User> CREATOR = new Parcelable.Creator<User>() {
@@ -231,31 +153,27 @@ public class User implements Parcelable {
     @Override
     public void writeToParcel(Parcel parcel, int flags) {
         parcel.writeString(objectId);
-        parcel.writeString(firstName);
-        parcel.writeString(lastName);
-        parcel.writeString(displayName);
+        parcel.writeString(name);
         parcel.writeString(email);
         parcel.writeString(gender);
-        parcel.writeString(password);
+        parcel.writeString(photo);
 
         DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
-        parcel.writeString(df.format(birthDate));
+        // parcel.writeString(df.format(birthDate));
     }
 
     protected User(Parcel parcel) {
         objectId = parcel.readString();
-        firstName = parcel.readString();
-        lastName = parcel.readString();
-        displayName = parcel.readString();
+        name = parcel.readString();
         email = parcel.readString();
         gender = parcel.readString();
-        password = parcel.readString();
+        photo = parcel.readString();
 
         DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
-        try {
+        /*try {
             birthDate = df.parse(parcel.readString());
         } catch (ParseException pex) {
             // birthDate = df.parse("01/01/1900");
-        }
+        }*/
     }
 }

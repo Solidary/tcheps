@@ -88,7 +88,7 @@ public class ProblemsFeedAdapter extends RecyclerView.Adapter<ProblemsFeedAdapte
         int rc = ColorGenerator.MATERIAL.getRandomColor();
         holder.authorAvatar.setImageDrawable(
                 TextDrawable.builder()
-                        .buildRound(problem.getAuthor().getInitials(), rc)
+                        .buildRound(problem.getAuthor().getName(), rc)
         );
 
         updateLikesCounter(new TsTag(holder, problem), false);
@@ -114,7 +114,7 @@ public class ProblemsFeedAdapter extends RecyclerView.Adapter<ProblemsFeedAdapte
             holder.created.setText(days + "d");
         }
 
-        holder.authorDisplayName.setText(problem.getAuthor().getDisplayName());
+        holder.authorDisplayName.setText(problem.getAuthor().getName());
         holder.authorDescription.setText(problem.getAuthor().getDescription());
         holder.description.setText(problem.getDescription());
 

@@ -64,7 +64,7 @@ public class SignInActivity extends AccountAuthenticatorActivity {
 
         ButterKnife.bind(this);
 
-        tsAccountManager = AccountManager.get(getBaseContext());
+        /*tsAccountManager = AccountManager.get(getBaseContext());
         tsAccountName = getIntent().getStringExtra(ARG_ACCOUNT_NAME);
         if (tsAccountName != null) {
             siEmail.setText(tsAccountName);
@@ -78,7 +78,7 @@ public class SignInActivity extends AccountAuthenticatorActivity {
         tsAuthTokenType = getIntent().getStringExtra(ARG_AUTH_TYPE);
         if (tsAuthTokenType == null) {
             tsAuthTokenType = TsAccountGeneral.AUTHTOKEN_TYPE_FULL_ACCESS;
-        }
+        }*/
     }
 
     @Override

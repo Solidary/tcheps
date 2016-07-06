@@ -134,10 +134,6 @@ public class UserProfileActivity extends AppCompatActivity {
 
     private void setupViewPagerAndTabs() {
         TsPageAdapter adapter = new TsPageAdapter(getSupportFragmentManager(), this);
-//        adapter.addFragment(new UserProfilePostsFragment(), "Posts");
-//        adapter.addFragment(new UserProfileFollowersFragment(), "Followers");
-//        adapter.addFragment(new UserProfileFollowingFragment(), "Following");
-//        adapter.addFragment(new UserProfileCirclesFragment(), "Circles");
 
         adapter.addFragment(new UsersFragment(User.USERS), "Posts");
         adapter.addFragment(new UsersFragment(User.USERS), "Followers");

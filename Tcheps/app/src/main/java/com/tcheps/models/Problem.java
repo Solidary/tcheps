@@ -14,7 +14,7 @@ import java.util.List;
  */
 public class Problem {
 
-    public static final List<Problem> PROBLEMS = new ArrayList<Problem>() {{
+    /*public static final List<Problem> PROBLEMS = new ArrayList<Problem>() {{
         add(new Problem() {{
             setObjectId("8895ewaf");
             setDescription("");
@@ -55,17 +55,17 @@ public class Problem {
             setAuthor(User.USERS.get(0));
             setComments(Comment.COMMENTS);
         }});
-    }};
+    }};*/
 
     @SerializedName("_id")
     private String objectId;
+
     @SerializedName("description")
     private String description;
+
     @SerializedName("subject")
     private String subject;
-    private List<String> tags;
-    @SerializedName("circle")
-    private String circle;
+
     @SerializedName("created")
     private Date created;
 
@@ -106,22 +106,6 @@ public class Problem {
         this.subject = subject;
     }
 
-    public List<String> getTags() {
-        return tags;
-    }
-
-    public void setTags(List<String> tags) {
-        this.tags = tags;
-    }
-
-    public String getCircle() {
-        return circle;
-    }
-
-    public void setCircle(String circle) {
-        this.circle = circle;
-    }
-
     public Date getCreated() {
         return created;
     }
@@ -130,6 +114,7 @@ public class Problem {
         this.created = created;
     }
 
+
     public User getAuthor() {
         return author;
     }
@@ -137,6 +122,7 @@ public class Problem {
     public void setAuthor(User author) {
         this.author = author;
     }
+
 
     public List<Comment> getComments() {
         return comments;
@@ -162,6 +148,7 @@ public class Problem {
         this.likes = likes;
     }
 
+
     public boolean isUserHasLiked(User user) {
         for (Like like: likes) {
             if (like.getAuthor().getObjectId().equals(user.getObjectId())) {
@@ -181,4 +168,5 @@ public class Problem {
                 ", created=" + created +
                 '}';
     }
+
 }

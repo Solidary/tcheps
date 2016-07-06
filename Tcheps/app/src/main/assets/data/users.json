@@ -1,0 +1,124 @@
+[
+  {
+    'name': "Anderson Thomas",
+    'photo': "@drawable/photo_male_1",
+    'level': "Tle D",
+    'school': "Lycee Classique et Moderne de NGaoundere",
+    'email': "anderson.thomas@tcheps.com",
+    'gender': "Male"
+  },
+  {
+    'name': "Adams Green",
+    'photo': "@drawable/photo_male_2",
+    'level': "Tle D",
+    'school': "Lycee Classique et Moderne de NGaoundere",
+    'email': "adams.green@tcheps.com",
+    'gender': "Male"
+  },
+  {
+    'name': "Laura Michelle",
+    'photo': "@drawable/photo_female_1",
+    'level': "Tle D",
+    'school': "Lycee Classique et Moderne de NGaoundere",
+    'email': "laura.michelle@tcheps.com",
+    'gender': "Female"
+  },
+  {
+    'name': "Betty L",
+    'photo': "@drawable/photo_female_2",
+    'level': "Tle D",
+    'school': "Lycee Classique et Moderne de NGaoundere",
+    'email': "betty.l@tcheps.com",
+    'gender': "Female"
+  },
+  {
+    'name': "Miller Wilson",
+    'photo': "@drawable/photo_male_3",
+    'level': "Tle D",
+    'school': "Lycee Classique et Moderne de NGaoundere",
+    'email': "miller.wilon@tcheps.com",
+    'gender': "Male"
+  },
+
+  {
+    'name': "Garcia Lewis",
+    'photo': "@drawable/photo_female_3",
+    'level': "Tle D",
+    'school': "Lycee Classique et Moderne de NGaoundere",
+    'email': "garcia.lewis@tcheps.com",
+    'gender': "Female"
+  },
+  {
+    'name': "Roberts Turner",
+    'photo': "@drawable/photo_male_4",
+    'level': "Tle D",
+    'school': "Lycee Classique et Moderne de NGaoundere",
+    'email': "roberts.turner@tcheps.com",
+    'gender': "Male"
+  },
+  {
+    'name': "Mary Jackson",
+    'photo': "@drawable/photo_female_4",
+    'level': "Tle D",
+    'school': "Lycee Classique et Moderne de NGaoundere",
+    'email': "mary.jackson@tcheps.com",
+    'gender': "Female"
+  },
+  {
+    'name': "Sarah Scott",
+    'photo': "@drawable/photo_female_5",
+    'level': "Tle D",
+    'school': "Lycee Classique et Moderne de NGaoundere",
+    'email': "sarah.scoot@tcheps.com",
+    'gender': "Female"
+  },
+  {
+    'name': "Kevin John",
+    'photo': "@drawable/photo_male_5",
+    'level': "Tle D",
+    'school': "Lycee Classique et Moderne de NGaoundere",
+    'email': "kevin.john@tcheps.com",
+    'gender': "Male"
+  },
+
+  {
+    'name': "Elizabeth",
+    'photo': "@drawable/photo_female_6",
+    'level': "Tle D",
+    'school': "Lycee Classique et Moderne de NGaoundere",
+    'email': "elizabeth@tcheps.com",
+    'gender': "Female"
+  },
+  {
+    'name': "Evans Collins",
+    'photo': "@drawable/photo_male_6",
+    'level': "Tle D",
+    'school': "Lycee Classique et Moderne de NGaoundere",
+    'email': "evans.collins@tcheps.com",
+    'gender': "Male"
+  },
+  {
+    'name': "Roberts",
+    'photo': "@drawable/photo_male_7",
+    'level': "Tle D",
+    'school': "Lycee Classique et Moderne de NGaoundere",
+    'email': "roberts@tcheps.com",
+    'gender': "Male"
+  },
+  {
+    'name': "Betty C",
+    'photo': "@drawable/photo_female_7",
+    'level': "Tle D",
+    'school': "Lycee Classique et Moderne de NGaoundere",
+    'email': "betty.c@tcheps.com",
+    'gender': "Female"
+  },
+  {
+    'name': "Susan Lee",
+    'photo': "@drawable/photo_female_8",
+    'level': "Tle D",
+    'school': "Lycee Classique et Moderne de NGaoundere",
+    'email': "susan.lee@tcheps.com",
+    'gender': "Female"
+  }
+]
