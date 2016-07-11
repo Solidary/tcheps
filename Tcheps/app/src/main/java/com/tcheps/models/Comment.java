@@ -1,5 +1,7 @@
 package com.tcheps.models;
 
+import com.tcheps.data.Constant;
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -9,7 +11,7 @@ import java.util.List;
  */
 public class Comment {
 
-    public final static List<Comment> COMMENTS = new ArrayList<Comment>() {{
+    public final static List<Comment> COMMENTS = new ArrayList<Comment>(); /*{{
         add(new Comment() {{
             setObjectId("458776");
             setDescription("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc sagittis faucibus rhoncus. Donec dignissim finibus diam nec sollicitudin. Nullam sed leo nec felis imperdiet maximus in mattis lacus. Phasellus eget quam ut metus commodo fermentum. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec condimentum ultricies risus, et ultricies leo sollicitudin sed. In hac habitasse platea dictumst. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Suspendisse in lacinia risus, sed mattis justo. Sed a quam laoreet nisl efficitur eleifend nec quis nisi.");
@@ -64,7 +66,7 @@ public class Comment {
             setCreated(new Date());
             setAuthor(User.USERS.get(3));
         }});
-    }} ;
+    }} ;*/
 
     private String objectId;
     private String description;

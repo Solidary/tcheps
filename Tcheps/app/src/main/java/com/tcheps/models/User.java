@@ -24,7 +24,7 @@ public class User implements Parcelable {
     private String name;
 
     @SerializedName("photo")
-    private Date photo;
+    private String photo;
 
     @SerializedName("email")
     private String email;
@@ -60,11 +60,11 @@ public class User implements Parcelable {
         this.name = name;
     }
 
-    public Date getPhoto() {
+    public String getPhoto() {
         return photo;
     }
 
-    public void setPhoto(Date photo) {
+    public void setPhoto(String photo) {
         this.photo = photo;
     }
 

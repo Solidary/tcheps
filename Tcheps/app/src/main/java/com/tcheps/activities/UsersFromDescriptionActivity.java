@@ -14,6 +14,7 @@ import android.view.MenuItem;
 
 import com.tcheps.activities.R;
 import com.tcheps.adapters.TsPageAdapter;
+import com.tcheps.data.Constant;
 import com.tcheps.fragments.UserProfileCirclesFragment;
 import com.tcheps.fragments.UserProfileFollowersFragment;
 import com.tcheps.fragments.UserProfileFollowingFragment;
@@ -79,7 +80,7 @@ public class UsersFromDescriptionActivity extends AppCompatActivity {
                 else if (i == 1) titles[i] = "Place : " + splitDescription[i].trim();
             }
 
-            adapter.addFragment(new UsersFragment(User.USERS), titles[i]);
+            adapter.addFragment(new UsersFragment(Constant.getUsersData(this.getBaseContext())), titles[i]);
         }
         ufdViewPager.setAdapter(adapter);
 

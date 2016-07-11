@@ -18,8 +18,11 @@ import com.amulyakhare.textdrawable.util.ColorGenerator;
 import com.tcheps.activities.R;
 import com.tcheps.adapters.CommentProblemAdapter;
 import com.tcheps.adapters.ProblemsFeedAdapter;
+import com.tcheps.data.Constant;
 import com.tcheps.models.Problem;
 import com.tcheps.models.User;
+
+import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -45,7 +48,7 @@ public class CommentProblemActivity extends AppCompatActivity implements
     TextView cpDescription;
 
     Problem problem;
-
+    List<Problem> problems = Constant.getProblemsData(this.getBaseContext());
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -57,9 +60,9 @@ public class CommentProblemActivity extends AppCompatActivity implements
         if (bundle.getString(ARG_PROBLEM_OBJECTID) != null) {
             String tag = bundle.getString(ARG_PROBLEM_OBJECTID);
 
-            for (int i = 0; i < Problem.PROBLEMS.size(); i++) {
-                if (Problem.PROBLEMS.get(i).getObjectId().equals(tag)) {
-                    problem = Problem.PROBLEMS.get(i);
+            for (int i = 0; i < problems.size(); i++) {
+                if (problems.get(i).getObjectId().equals(tag)) {
+                    problem = problems.get(i);
 
                     break;
                 }
@@ -76,7 +79,7 @@ public class CommentProblemActivity extends AppCompatActivity implements
                 TextDrawable.builder()
                         .buildRound(problem.getAuthor().getInitials(), ColorGenerator.MATERIAL.getRandomColor())
         );
-        cpAuthorDisplayName.setText(problem.getAuthor().getDisplayName());
+        cpAuthorDisplayName.setText(problem.getAuthor().getName());
         cpAuthorDescription.setText(problem.getAuthor().getDescription());
         cpDescription.setText(getString(R.string.lorem_ipsum));
     }

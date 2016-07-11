@@ -19,15 +19,20 @@ import com.amulyakhare.textdrawable.TextDrawable;
 import com.amulyakhare.textdrawable.util.ColorGenerator;
 import com.tcheps.activities.R;
 import com.tcheps.adapters.TsPageAdapter;
+import com.tcheps.data.Constant;
 import com.tcheps.fragments.UserProfileCirclesFragment;
 import com.tcheps.fragments.UserProfileFollowersFragment;
 import com.tcheps.fragments.UserProfileFollowingFragment;
 import com.tcheps.fragments.UserProfilePostsFragment;
 import com.tcheps.fragments.UsersFragment;
+import com.tcheps.models.Comment;
 import com.tcheps.models.User;
 
 // import org.parceler.apache.commons.lang.WordUtils;
+import org.parceler.apache.commons.lang.WordUtils;
 import org.w3c.dom.Text;
+
+import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -68,6 +73,7 @@ public class UserProfileActivity extends AppCompatActivity {
     FloatingActionButton upFAB;
 
     private User user;
+    List<User> users = Constant.getUsersData(getBaseContext());
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,15 +85,15 @@ public class UserProfileActivity extends AppCompatActivity {
         if (bundle.getString(ARG_USER_OBJECTID) != null) {
             String tag = bundle.getString(ARG_USER_OBJECTID);
 
-            for (int i = 0; i < User.USERS.size(); i++) {
-                if (User.USERS.get(i).getObjectId().equals(tag)) {
-                    user = User.USERS.get(i);
+            for (int i = 0; i < users.size(); i++) {
+                if (users.get(i).getObjectId().equals(tag)) {
+                    user = users.get(i);
 
                     break;
                 }
             }
         }
-        if (user.getDisplayName().equals(User.USERS.get(0).getDisplayName())) {
+        if (user.getName().equals(users.get(0).getName())) {
             upFAB.setImageDrawable(getResources().getDrawable(R.drawable.ic_edit_white_18dp));
         } else {
             upFAB.setImageDrawable(getResources().getDrawable(R.drawable.ic_star_rate_white_18dp));
@@ -100,45 +106,36 @@ public class UserProfileActivity extends AppCompatActivity {
     }
 
     private void setupToolbar() {
-        toolbar.setTitle(User.USERS.get(0).getDisplayName());
-        toolbar.setSubtitle(User.USERS.get(0).getDescription());
+        toolbar.setTitle(users.get(0).getName());
+        toolbar.setSubtitle(users.get(0).getDescription());
         setSupportActionBar(toolbar);
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
     private void setupCollapsingToolbar() {
-        String lastname = user.getLastName().substring(0, 1).toUpperCase() +
+        /*String lastname = user.getName().substring(0, 1).toUpperCase() +
                 user.getLastName().substring(1).toLowerCase();
         String firstname = user.getFirstName().substring(0, 1).toUpperCase() +
                 user.getFirstName().substring(1).toLowerCase();
-            Log.d("Tcheps", "setupCollapsingToolbar >>> " + lastname);
+            Log.d("Tcheps", "setupCollapsingToolbar >>> " + lastname);*/
         // String lastname = WordUtils.capitalize(user.getLastName());
-        upLastName.setText(firstname + " " + lastname);
-        /*upLastName.setImageDrawable(
-                TextDrawable.builder()
-                        .beginConfig()
-                            .useFont(Typeface.createFromAsset(getAssets(), "fonts/Royal2.ttf"))
-                            .bold()
-                            .toUpperCase()
-                        .endConfig()
-                        .buildRect(user.getLastName(), R.color.color_toolbar)
-        );*/
+        upLastName.setText(WordUtils.capitalize(user.getName()));
         upAvatar.setImageDrawable(
                 TextDrawable.builder()
                         .buildRound(user.getInitials(), ColorGenerator.MATERIAL.getRandomColor())
         );
-        upDisplayName.setText(user.getDisplayName());
+        upDisplayName.setText(user.getName());
         upDescription.setText(user.getDescription());
     }
 
     private void setupViewPagerAndTabs() {
         TsPageAdapter adapter = new TsPageAdapter(getSupportFragmentManager(), this);
 
-        adapter.addFragment(new UsersFragment(User.USERS), "Posts");
-        adapter.addFragment(new UsersFragment(User.USERS), "Followers");
-        adapter.addFragment(new UsersFragment(User.USERS), "Following");
-        adapter.addFragment(new UsersFragment(User.USERS), "Circles");
+        adapter.addFragment(new UsersFragment(users), "Posts");
+        adapter.addFragment(new UsersFragment(users), "Followers");
+        adapter.addFragment(new UsersFragment(users), "Following");
+        adapter.addFragment(new UsersFragment(users), "Circles");
         upViewPager.setAdapter(adapter);
 
         upTablayout.setupWithViewPager(upViewPager);

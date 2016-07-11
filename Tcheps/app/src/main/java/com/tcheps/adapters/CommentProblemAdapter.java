@@ -56,7 +56,7 @@ public class CommentProblemAdapter extends RecyclerView.Adapter<CommentProblemAd
                 TextDrawable.builder()
                         .buildRound(problem.getAuthor().getInitials(), rc)
         );
-        holder.authorDisplayName.setText(problem.getAuthor().getDisplayName());
+        holder.authorDisplayName.setText(problem.getAuthor().getName());
         holder.authorDescription.setText(problem.getAuthor().getDescription());
         holder.description.setText(problem.getDescription());
 

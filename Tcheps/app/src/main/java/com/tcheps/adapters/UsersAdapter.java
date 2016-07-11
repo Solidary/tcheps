@@ -55,7 +55,7 @@ public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.ViewHolder> 
                 TextDrawable.builder()
                         .buildRound(user.getInitials(), rc)
         );
-        holder.uDisplayName.setText(user.getDisplayName());
+        holder.uDisplayName.setText(user.getName());
         holder.uDescription.setText(user.getDescription());
 
         holder.uAvatar.setTag(user.getObjectId());
